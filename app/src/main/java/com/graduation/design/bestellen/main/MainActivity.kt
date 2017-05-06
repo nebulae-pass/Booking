@@ -8,7 +8,8 @@ import android.support.v7.widget.Toolbar
 import butterknife.bindView
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.model.ApplyInfo
+import com.graduation.design.bestellen.main.reservation.ReservationFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by pan on 2017/5/4.
@@ -16,9 +17,6 @@ import com.graduation.design.bestellen.model.ApplyInfo
  */
 class MainActivity : BaseActivity() {
 
-    val mViewPager: ViewPager by bindView(R.id.container)
-    val mTabLayout: TabLayout by bindView(R.id.tab_layout)
-    val mToolbar: Toolbar by bindView(R.id.toolbar)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +24,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        setSupportActionBar(mToolbar)
+        setSupportActionBar(toolbar)
         supportActionBar?.title = "主页"
 
         val fragments = ArrayList<Fragment>()
@@ -37,8 +35,7 @@ class MainActivity : BaseActivity() {
         titles.add("会议室列表")
         titles.add("预约记录")
 
-        mViewPager.adapter = ContainerPagerAdapter(supportFragmentManager, fragments, titles)
-        mViewPager.currentItem = 1
-        mTabLayout.setupWithViewPager(mViewPager)
+        container.adapter = ContainerPagerAdapter(supportFragmentManager, fragments, titles)
+        tabLayout.setupWithViewPager(container)
     }
 }

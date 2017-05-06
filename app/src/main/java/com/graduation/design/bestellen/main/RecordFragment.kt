@@ -9,5 +9,8 @@ import com.graduation.design.bestellen.base.BaseFragment
 class RecordFragment : BaseFragment() {
     override fun getLayout(): Int = R.layout.fragment_record
 
+    override fun initData() {
+
+    }
 
 }

@@ -10,7 +10,7 @@ import android.widget.TextView
 /**
  * Created by pan on 2017/5/5.
  */
-class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var mViews: SparseArray<View> = SparseArray()
 
     fun obtainView(viewId: Int): View {
@@ -29,16 +29,13 @@ class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         return this
     }
 
-    fun getImageView(id: Int): ImageView {
-        return obtainView(id) as ImageView
-    }
-
     fun setButtonListener(id: Int, onClickListener: View.OnClickListener): BaseViewHolder {
         obtainView(id).setOnClickListener(onClickListener)
         return this
     }
 
-    fun getButton(resId: Int): Button {
-        return obtainView(resId) as Button
+    fun setVisibility(id: Int, visible: Boolean): BaseViewHolder {
+        obtainView(id).visibility = if(visible)View.VISIBLE else View.GONE
+        return this
     }
 }
