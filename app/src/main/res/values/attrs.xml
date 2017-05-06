@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="ReinforceRecyclerView">
+        <attr name="needRefresh" format="boolean"/>
+        <attr name="layout_empty" format="reference"/>
+        <attr name="layout_loading" format="reference"/>
+    </declare-styleable>
+</resources>

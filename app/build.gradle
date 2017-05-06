@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -29,13 +29,14 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-//    compile 'nebulae.library.wheel:formview:1.0.0'
+    //    compile 'nebulae.library.wheel:formview:1.0.0'
     compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+    compile 'com.android.support:design:25.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
+    compile project(':formview-debug')
 }
 
 repositories {
