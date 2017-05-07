@@ -49,8 +49,8 @@ data class ApplyInfo(var start: String,
 
 class RoomDevice {
     companion object {
-        val net = 1
-        val projection = 2
-        val microphone = 3
+        val net = 0
+        val projection = 1
+        val microphone = 2
     }
 }

@@ -1,5 +1,6 @@
 package com.graduation.design.bestellen.main.reservation
 
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.graduation.design.bestellen.base.BaseFragment
 import com.graduation.design.bestellen.model.RoomDetail
@@ -15,10 +16,7 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
 
     val mPresenter: ReservationPresenter = ReservationPresenter(this, ReservationData())
 
-    override fun initData() {
-        mPresenter.loadData()
-    }
-
+    //from view interface
     override fun setPresenter(presenter: ReservationContract.Presenter) {
     }
 
@@ -31,17 +29,25 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
     }
 
     override fun updateRecyclerView() {
+        e("notify called")
         mAdapter?.notifyDataSetChanged()
     }
 
     override fun getDataSet(): MutableList<RoomDetail>? = mAdapter?.getDataSet()
 
+    //from baseFragment
+    override fun initData() {
+        e("init")
+        mPresenter.loadData()
+    }
 
     override fun getLayout(): Int = com.graduation.design.bestellen.R.layout.fragment_reservation
 
     override fun initViews() {
+        e("initView")
         mAdapter = ReservationAdapter(activity, ArrayList())
         recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
+        recyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL), 0)
         recyclerView.setAdapter(mAdapter)
     }
 }
