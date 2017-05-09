@@ -24,14 +24,11 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:layout_marginTop="8dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/capacity"
         app:layout_constraintLeft_toLeftOf="@+id/room_name"
         app:layout_constraintTop_toBottomOf="@+id/room_name"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="逸夫楼"/>
 
     <TextView
@@ -53,8 +50,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_people_black_24dp"
+        android:drawableLeft="@drawable/ic_capacity"
         android:gravity="center"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location"
@@ -69,7 +67,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/capacity"
         app:layout_constraintRight_toLeftOf="@+id/projection_enable"
-        app:srcCompat="@drawable/ic_wifi_black_24dp"/>
+        app:srcCompat="@drawable/ic_net"/>
 
     <ImageView
         android:id="@+id/projection_enable"

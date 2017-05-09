@@ -1,13 +1,10 @@
 package com.graduation.design.bestellen.main
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.Toolbar
-import butterknife.bindView
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
+import com.graduation.design.bestellen.main.record.RecordFragment
 import com.graduation.design.bestellen.main.reservation.ReservationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 

@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.model
 
 import android.os.Parcel
+import android.util.SparseArray
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
@@ -10,13 +11,14 @@ import paperparcel.PaperParcelable
  */
 @Suppress("unused")
 @PaperParcel
-data class RoomDetail(var id: Int,
-                      var name: String,
-                      var type: String,
-                      var capacity: Int,
-                      var location: String,
-                      var deviceEnable: List<Boolean>,
-                      var append: String) : PaperParcelable {
+data class RoomDetail(val rid: String,
+                      val name: String,
+                      val type: String,
+                      val capacity: Int,
+                      val location: String,
+                      val belong: String,
+                      val deviceEnable: List<Boolean>,
+                      val append: String) : PaperParcelable {
     companion object {
         @JvmField val CREATOR = PaperParcelRoomDetail.CREATOR
     }
@@ -28,9 +30,9 @@ data class RoomDetail(var id: Int,
     }
 }
 
-data class RoomOccupation(var id: Int,
-                          var date: String,
-                          var occupyList: Array<OccupyTime>) {
+data class DailyRoomOccupation(var rid: String,
+                               var date: String,
+                               var occupyList: Array<OccupyTime>) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }
@@ -40,12 +42,18 @@ data class RoomOccupation(var id: Int,
     }
 }
 
-data class OccupyTime(var start: String,
-                      var end: String)
+data class WeeklyRoomOccupation(val rid: String,
+                                val weeklyOccupy: SparseArray<DailyRoomOccupation>)
 
-data class ApplyInfo(var start: String,
-                     var end: String,
-                     var applyAppend: String)
+
+data class OccupyTime(val start: String,
+                      val end: String)
+
+data class ApplyInfo(val uid: String,
+                     val rid: String,
+                     val occupyTime: OccupyTime,
+                     val applyAppend: String)
+
 
 class RoomDevice {
     companion object {

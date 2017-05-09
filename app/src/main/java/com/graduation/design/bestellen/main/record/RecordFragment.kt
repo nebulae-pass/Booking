@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.main
+package com.graduation.design.bestellen.main.record
 
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseFragment

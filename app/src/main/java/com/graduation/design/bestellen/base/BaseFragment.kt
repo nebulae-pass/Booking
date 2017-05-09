@@ -1,7 +1,10 @@
 package com.graduation.design.bestellen.base
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +19,7 @@ abstract class BaseFragment : Fragment() {
     var isFirstVisible = true
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        e(" onCreateView")
+        e("onCreateView")
         return inflater?.inflate(getLayout(), container, false)
     }
 
@@ -42,5 +45,11 @@ abstract class BaseFragment : Fragment() {
 
     fun Fragment.e(s: String) {
         Log.e((this::class.java.canonicalName).toString(), s)
+    }
+
+    inline fun <reified T: Activity> Fragment.startActivity(vararg params:Pair<String, Parcelable>) {
+        val intent = Intent(activity, T::class.java)
+        params.forEach { intent.putExtra(it.first, it.second) }
+        startActivity(intent)
     }
 }

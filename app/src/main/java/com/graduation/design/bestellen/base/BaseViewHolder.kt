@@ -3,12 +3,11 @@ package com.graduation.design.bestellen.base
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 
 /**
  * Created by pan on 2017/5/5.
+ * sparse array cache view
  */
 class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var mViews: SparseArray<View> = SparseArray()
@@ -29,7 +28,7 @@ class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return this
     }
 
-    fun setButtonListener(id: Int, onClickListener: View.OnClickListener): BaseViewHolder {
+    fun setOnclickListener(id: Int, onClickListener: View.OnClickListener): BaseViewHolder {
         obtainView(id).setOnClickListener(onClickListener)
         return this
     }

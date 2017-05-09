@@ -4,6 +4,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.graduation.design.bestellen.base.BaseFragment
 import com.graduation.design.bestellen.model.RoomDetail
+import com.graduation.design.bestellen.roomdetail.RoomDetailActivity
 import kotlinx.android.synthetic.main.fragment_reservation.*
 
 /**
@@ -21,15 +22,14 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
     }
 
     override fun showLoading() {
-        recyclerView.showLoadingView()
+        recyclerView.setRefreshing(true)
     }
 
     override fun hideLoading() {
-        recyclerView.hideLoadingView()
+        recyclerView.setRefreshing(false)
     }
 
     override fun updateRecyclerView() {
-        e("notify called")
         mAdapter?.notifyDataSetChanged()
     }
 
@@ -37,17 +37,23 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
 
     //from baseFragment
     override fun initData() {
-        e("init")
-        mPresenter.loadData()
+        mPresenter.initData()
     }
 
     override fun getLayout(): Int = com.graduation.design.bestellen.R.layout.fragment_reservation
 
     override fun initViews() {
-        e("initView")
         mAdapter = ReservationAdapter(activity, ArrayList())
+        mAdapter?.setOnItemClickListener { _, position ->
+            val detail = mAdapter?.mDataSet?.get(position)
+            startActivity<RoomDetailActivity>(Pair("detail", detail as RoomDetail))
+        }
         recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
         recyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL), 0)
         recyclerView.setAdapter(mAdapter)
+        recyclerView.setOnRefreshListener {
+            mPresenter.loadMoreData()
+        }
+
     }
 }

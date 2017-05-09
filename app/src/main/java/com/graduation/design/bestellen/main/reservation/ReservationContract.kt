@@ -21,6 +21,8 @@ interface ReservationContract {
     }
 
     interface Presenter: BasePresenter {
-        fun loadData()
+        fun initData()
+
+        fun loadMoreData()
     }
 }
