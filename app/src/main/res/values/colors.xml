@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#448aff</color>
+    <color name="colorPrimary">#457596</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="room_available_color">#55bdbdbd</color>
+    <color name="room_occupied_color">#55f48fb1</color>
+    <color name="room_closed_color">#757575</color>
+    <color name="room_selected_color">#55448aff</color>
 </resources>

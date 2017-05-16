@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.os.Build
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
+import com.graduation.design.bestellen.R
 
 /**
  * Created by pan on 2017/5/4.
@@ -36,6 +38,13 @@ abstract class BaseActivity : AppCompatActivity() {
     fun Activity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, text, duration).show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(getMenuRes(), menu)
+        return true
+    }
+
+    fun getMenuRes() = R.menu.menu_scrolling
 
     fun Activity.snack(view: View, text: String, duration: Int = Snackbar.LENGTH_SHORT) {
         Snackbar.make(view, text, duration)

@@ -1,5 +1,6 @@
 package com.graduation.design.bestellen.main.reservation
 
+import android.support.design.widget.Snackbar
 import com.graduation.design.bestellen.base.BasePresenter
 import com.graduation.design.bestellen.base.BaseView
 import com.graduation.design.bestellen.model.RoomDetail
@@ -18,11 +19,15 @@ interface ReservationContract {
 
         fun updateRecyclerView()
 
+        fun showSnackBar(resId: Int, duration: Int = Snackbar.LENGTH_LONG)
+
     }
 
     interface Presenter: BasePresenter {
         fun initData()
 
         fun loadMoreData()
+
+        fun refreshData()
     }
 }

@@ -30,9 +30,10 @@ data class RoomDetail(val rid: String,
     }
 }
 
-data class DailyRoomOccupation(var rid: String,
-                               var date: String,
-                               var occupyList: Array<OccupyTime>) {
+data class DailyRoomOccupation(val rid: String,
+                               val date: String,
+                               val occupyList: ArrayList<OccupyTime>,
+                               val openingTime: OccupyTime) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }
@@ -46,8 +47,8 @@ data class WeeklyRoomOccupation(val rid: String,
                                 val weeklyOccupy: SparseArray<DailyRoomOccupation>)
 
 
-data class OccupyTime(val start: String,
-                      val end: String)
+data class OccupyTime(val start: Int,
+                      val end: Int)
 
 data class ApplyInfo(val uid: String,
                      val rid: String,

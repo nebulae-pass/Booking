@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Bestellen</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="request_time_out">请求超时</string>
+    <string name="refresh_failed_please_check">刷新失败，请检查网络是否正常</string>
+    <string name="date_format">%1$s年%2$s月%3$s日</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

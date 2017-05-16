@@ -1,10 +1,12 @@
 package com.graduation.design.bestellen.main.reservation
 
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.graduation.design.bestellen.base.BaseFragment
 import com.graduation.design.bestellen.model.RoomDetail
-import com.graduation.design.bestellen.roomdetail.RoomDetailActivity
+import com.graduation.design.bestellen.room.RoomBookingActivity
 import kotlinx.android.synthetic.main.fragment_reservation.*
 
 /**
@@ -33,6 +35,10 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
         mAdapter?.notifyDataSetChanged()
     }
 
+    override fun showSnackBar(resId: Int, duration: Int) {
+        Snackbar.make(view as View, resId, duration).show()
+    }
+
     override fun getDataSet(): MutableList<RoomDetail>? = mAdapter?.getDataSet()
 
     //from baseFragment
@@ -46,14 +52,13 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
         mAdapter = ReservationAdapter(activity, ArrayList())
         mAdapter?.setOnItemClickListener { _, position ->
             val detail = mAdapter?.mDataSet?.get(position)
-            startActivity<RoomDetailActivity>(Pair("detail", detail as RoomDetail))
+            startActivity<RoomBookingActivity>(Pair("detail", detail as RoomDetail))
         }
         recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
         recyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL), 0)
         recyclerView.setAdapter(mAdapter)
         recyclerView.setOnRefreshListener {
-            mPresenter.loadMoreData()
+            mPresenter.refreshData()
         }
-
     }
 }

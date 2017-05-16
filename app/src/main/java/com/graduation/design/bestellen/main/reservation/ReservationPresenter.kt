@@ -1,5 +1,7 @@
 package com.graduation.design.bestellen.main.reservation
 
+import com.graduation.design.bestellen.R
+
 /**
  * Created by pan on 2017/5/6.
  * reservation presenter
@@ -16,11 +18,28 @@ class ReservationPresenter(view: ReservationContract.View, data: ReservationData
     }
 
     override fun initData() {
-        mData.loadData{dataList ->
+        mView.showLoading()
+        mData.loadData(onResponse = { dataList ->
             mView.getDataSet()?.addAll(dataList)
             mView.updateRecyclerView()
             mView.hideLoading()
-        }
+        }, onError = {
+            mView.hideLoading()
+            mView.showSnackBar(R.string.request_time_out)
+        })
+    }
+
+    override fun refreshData() {
+        mView.showLoading()
+        mData.loadData(onResponse =  { dataList ->
+            mView.getDataSet()?.clear()
+            mView.getDataSet()?.addAll(dataList)
+            mView.updateRecyclerView()
+            mView.hideLoading()
+        },onError = {
+            mView.hideLoading()
+            mView.showSnackBar(R.string.refresh_failed_please_check)
+        })
     }
 
     override fun loadMoreData() {

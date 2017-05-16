@@ -19,9 +19,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".roomdetail.RoomDetailActivity"
-            android:label="@string/title_activity_scrolling"
+            android:name=".room.RoomBookingActivity"
             android:theme="@style/AppTheme">
+            <intent-filter>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

@@ -9,8 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory
  * base remote repository
  */
 open class RemoteDataRepository {
+    val BASE_URL = "http://10.0.2.2:6789/"
+
     open val mRetrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:6789/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

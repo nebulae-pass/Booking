@@ -82,7 +82,7 @@
 
     <ImageView
         android:id="@+id/mic_enable"
-        android:layout_width="24dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
         android:layout_marginRight="16dp"

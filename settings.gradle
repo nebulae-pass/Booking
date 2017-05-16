@@ -1,1 +1,2 @@
-include ':app', ':formview-debug'
+include ':app', ':nformview'
+project(':nformview').projectDir = new File('formview')
