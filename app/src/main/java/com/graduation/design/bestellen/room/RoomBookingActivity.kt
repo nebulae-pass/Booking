@@ -40,8 +40,9 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
-        if (intent.extras != null && intent.extras.containsKey("detail")) {
-            val detail: RoomDetail = intent.extras["detail"] as RoomDetail
+//        if (intent.extras != null && intent.extras.containsKey("detail")) {
+//            val detail: RoomDetail = intent.extras["detail"] as RoomDetail
+        val detail = RoomDetail("1","逸夫楼503","教室",20,"南区逸夫楼","",mutableListOf(true,true,true),"")
             titleText.text = detail.name
             locationText.text = detail.location
             appendText.text = detail.append
@@ -49,11 +50,13 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             netEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.net]) View.VISIBLE else View.GONE
             projectionEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.projection]) View.VISIBLE else View.GONE
             micEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.microphone]) View.VISIBLE else View.GONE
-        }
+//        }
 
         mStatusBarHeight = getStatusBarHeight()
         formView.post {
-            var marginTop = selector.height + colorDescription.height
+            var marginTop = selector.height
+            (colorDescription.layoutParams as CoordinatorLayout.LayoutParams).topMargin = marginTop
+            marginTop += colorDescription.height
             (formView.layoutParams as CoordinatorLayout.LayoutParams).topMargin = marginTop
             marginTop = supportActionBar?.height as Int + mStatusBarHeight
             (detailLayout.layoutParams as CollapsingToolbarLayout.LayoutParams).topMargin = marginTop

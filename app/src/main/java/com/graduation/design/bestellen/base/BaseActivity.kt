@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.base
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.support.design.widget.Snackbar
@@ -48,5 +49,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun Activity.snack(view: View, text: String, duration: Int = Snackbar.LENGTH_SHORT) {
         Snackbar.make(view, text, duration)
+    }
+
+    fun Context.dip2Px(dip: Float) : Float{
+        return dip * resources.displayMetrics.density
     }
 }

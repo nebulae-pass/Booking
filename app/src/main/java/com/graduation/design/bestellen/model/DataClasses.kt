@@ -55,6 +55,9 @@ data class ApplyInfo(val uid: String,
                      val occupyTime: OccupyTime,
                      val applyAppend: String)
 
+data class User(val account: String,
+                val password: String)
+
 
 class RoomDevice {
     companion object {

@@ -52,4 +52,8 @@ abstract class BaseFragment : Fragment() {
         params.forEach { intent.putExtra(it.first, it.second) }
         startActivity(intent)
     }
+
+    fun Fragment.dip2Px(dip: Float) : Float{
+        return dip * resources.displayMetrics.density
+    }
 }
