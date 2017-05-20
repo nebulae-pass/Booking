@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.dialog_loading.*
 
 /**
  * Created by pan on 2017/5/19.
+ * loading dialog
  */
 class LoadingDialog(resId:Int = R.string.operation_accessing) : BaseDialog() {
     var mResId = resId
@@ -13,6 +14,7 @@ class LoadingDialog(resId:Int = R.string.operation_accessing) : BaseDialog() {
     override fun getLayout() = R.layout.dialog_loading
 
     override fun initViews() {
+        isCancelable = false
         loadingTipText.setText(mResId)
     }
 }

@@ -14,22 +14,28 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <ImageView
+            android:contentDescription="@string/action_settings"
+            android:id="@+id/close"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat = "@drawable/ic_close"/>
         <TextView
             android:id="@+id/tipText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
             android:gravity="center"
-            android:text="@string/login"
+            android:paddingBottom="16dp"
+            android:text="@string/user_login"
             android:textColor="@color/colorPrimary"
-            android:textSize="56sp"/>
+            android:textSize="28sp"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/accountLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp">
+            >
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/accountEditText"
@@ -44,8 +50,7 @@
             android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp">
+            >
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/passwordEditText"
@@ -57,26 +62,40 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingEnd="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:paddingBottom="16dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:paddingTop="16dp"
-            android:textSize="16sp"
+            android:text="@string/sign_up_tip"
             android:textColor="@color/colorPrimary"
-            android:text="@string/sign_up_tip"/>
+            android:textSize="16sp"/>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:cpb_selectorError="@drawable/bg_circular_button_error"
+            app:cpb_selectorIdle="@drawable/bg_circular_button_idle"
+            app:cpb_textIdle="@string/login"/>
 
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/loginFab"
+        android:id="@+id/titleFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/ic_done"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="center"
+        app:fabSize="normal"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_account"
         tools:ignore="RelativeOverlap"/>
 </RelativeLayout>

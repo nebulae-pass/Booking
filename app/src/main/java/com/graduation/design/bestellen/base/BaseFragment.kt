@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.graduation.design.bestellen.common.Logs
 
 /**
  * Created by pan on 2017/5/3.
@@ -19,7 +20,7 @@ abstract class BaseFragment : Fragment() {
     var isFirstVisible = true
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        e("onCreateView")
+        Logs.e("onCreateView")
         return inflater?.inflate(getLayout(), container, false)
     }
 
@@ -42,10 +43,6 @@ abstract class BaseFragment : Fragment() {
     abstract fun initData(): Unit
 
     open fun initViews(): Unit {}
-
-    fun Fragment.e(s: String) {
-        Log.e((this::class.java.canonicalName).toString(), s)
-    }
 
     inline fun <reified T: Activity> Fragment.startActivity(vararg params:Pair<String, Parcelable>) {
         val intent = Intent(activity, T::class.java)

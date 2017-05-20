@@ -6,6 +6,7 @@
     <string name="input_account">请输入用户名</string>
     <string name="input_password">请输入密码</string>
     <string name="login">登录</string>
+    <string name="user_login">用户登录</string>
     <string name="sign_up">注册</string>
     <string name="sign_up_tip">注册新账户</string>
     <string name="error_invalid_account">用户名只能包含\'-\'，数字或字母</string>

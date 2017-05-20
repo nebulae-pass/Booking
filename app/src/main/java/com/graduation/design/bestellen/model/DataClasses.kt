@@ -58,6 +58,9 @@ data class ApplyInfo(val uid: String,
 data class User(val account: String,
                 val password: String)
 
+data class RequestResult(val code: Int,
+                         val message: String)
+
 
 class RoomDevice {
     companion object {

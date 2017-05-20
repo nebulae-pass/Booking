@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.main.reservation
 
 import android.util.Log
+import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository
 import com.graduation.design.bestellen.model.RoomDetail
 import io.reactivex.Observable
@@ -25,7 +26,7 @@ class ReservationData : RemoteDataRepository() {
                     onResponse(response.body())
                 }, { e ->
                     onError(e)
-                    Log.e("exception", e.message)
+                    Logs.e(e.toString())
                 })
     }
 
