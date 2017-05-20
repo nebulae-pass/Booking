@@ -52,9 +52,9 @@ class StatusCell(context: Context) : FormCell(context) {
     override fun draw(canvas: Canvas?) {
     }
 
-    override fun calculateCellWidth(colCount: Int, viewWidth: Int): Float {
+    override fun calculateCellWidth(remainColCount: Int, remainViewWidth: Int): Float {
         val default = DensityUtil.dip2Px(mContext, 30f)
-        val max = viewWidth / colCount
+        val max = remainViewWidth / remainColCount
 
         if (default > max) {
             return default
@@ -62,9 +62,9 @@ class StatusCell(context: Context) : FormCell(context) {
         return max.toFloat()
     }
 
-    override fun calculateCellHeight(rowCount: Int, viewHeight: Int): Float {
+    override fun calculateCellHeight(remainRowCount: Int, remainViewHeight: Int): Float {
         val default = DensityUtil.dip2Px(mContext, 30f)
-        val max = viewHeight / rowCount
+        val max = remainViewHeight / remainRowCount
 
         if (default > max) {
             return default

@@ -4,6 +4,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseFragment
+import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.main.reservation.ReservationAdapter
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.room.RoomBookingActivity
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_reservation.*
 
 /**
  * Created by pan on 2017/5/5.
+ * Record Fragment,show booking record
  */
 class RecordFragment : BaseFragment() {
     var mAdapter:ReservationAdapter? = null

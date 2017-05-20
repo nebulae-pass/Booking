@@ -12,14 +12,16 @@ import com.nebula.wheel.StringFormCell
 class FormAdapter(context: Context, dataList: Array<RoomBookingActivity.FormRow>) : FormView.BaseAdapter<FormCell>() {
     val mContext = context
     val mDataList = dataList
-    val title = Array(8){it->
+
+    val title = Array(8) { it ->
         if (it == 0) {
             return@Array "时间段"
         }
-        return@Array it.toString()+"日"
+        return@Array it.toString() + "日"
     }
 
-    override fun bindCell(cell: FormCell?, rowNumber: Int, colNumber: Int) {
+    override fun bindCell(cell: FormCell, rowNumber: Int, colNumber: Int) {
+        cell.isClickable = false
         if (cell is StringFormCell) {
             if (rowNumber == 0) {
                 cell.content = title[colNumber]
@@ -29,23 +31,9 @@ class FormAdapter(context: Context, dataList: Array<RoomBookingActivity.FormRow>
             }
         }
         if (cell is StatusCell) {
-            val status: StatusCell.Status
-            when (mDataList[rowNumber - 1].statusList[colNumber - 1]) {
-                -1 -> {
-                    status = StatusCell.Status.CLOSED
-                }
-                0 -> {
-                    status = StatusCell.Status.AVAILABLE
-                }
-                1 -> {
-                    status = StatusCell.Status.OCCUPIED
-                }
-                2 -> {
-                    status = StatusCell.Status.SELECTED
-                }
-                else -> {
-                    status = StatusCell.Status.CLOSED
-                }
+            val status = getStatus(rowNumber, colNumber)
+            if (status == StatusCell.Status.SELECTED||status == StatusCell.Status.AVAILABLE) {
+                cell.isClickable = true
             }
             cell.setStatus(status)
         }
@@ -60,5 +48,23 @@ class FormAdapter(context: Context, dataList: Array<RoomBookingActivity.FormRow>
         return StatusCell(mContext)
     }
 
-    override fun getColumnCount() = 2
+    override fun getColumnCount() = mDataList[0].getSize()
+
+    private fun getStatus(rowNumber: Int, colNumber: Int) = when (mDataList[rowNumber - 1].statusList[colNumber - 1]) {
+        -1 -> {
+            StatusCell.Status.CLOSED
+        }
+        0 -> {
+            StatusCell.Status.AVAILABLE
+        }
+        1 -> {
+            StatusCell.Status.OCCUPIED
+        }
+        2 -> {
+            StatusCell.Status.SELECTED
+        }
+        else -> {
+            StatusCell.Status.CLOSED
+        }
+    }
 }

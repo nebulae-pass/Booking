@@ -4,7 +4,7 @@ package com.graduation.design.bestellen.login
  * Created by pan on 2017/5/19.
  * Login Presenter
  */
-class LoginPresenter(view: LoginDialog, data: LoginData) : LoginContract.Presenter {
+class LoginPresenter(view: LoginContract.View, data: LoginData) : LoginContract.Presenter {
 
     val mView = view
     val mData = data
@@ -15,15 +15,11 @@ class LoginPresenter(view: LoginDialog, data: LoginData) : LoginContract.Present
 
     override fun login(account: String, password: String) {
         mView.startProgressing()
-        mData.loginForResult(account, password,
-                onSuccess = {
-                    mView.onSuccess()
-                },
-                onFailed = { it ->
-                    mView.activity.runOnUiThread {
-                        mView.onFailed(it)
-                    }
-                })
+        mData.loginForResult(account, password, onSuccess = {
+            mView.onSuccess()
+        }, onFailed = { it ->
+            mView.onFailed(it)
+        })
     }
 
     override fun checkInput(account: String, password: String) {

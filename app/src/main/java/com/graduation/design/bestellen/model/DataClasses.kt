@@ -47,11 +47,13 @@ data class WeeklyRoomOccupation(val rid: String,
                                 val weeklyOccupy: SparseArray<DailyRoomOccupation>)
 
 
-data class OccupyTime(val start: Int,
+data class OccupyTime(val id: Int = 0,
+                      val start: Int,
                       val end: Int)
 
 data class ApplyInfo(val uid: String,
                      val rid: String,
+                     val date: String,
                      val occupyTime: OccupyTime,
                      val applyAppend: String)
 
