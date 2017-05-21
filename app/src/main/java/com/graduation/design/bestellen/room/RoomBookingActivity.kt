@@ -1,14 +1,17 @@
 package com.graduation.design.bestellen.room
 
 import android.app.DatePickerDialog
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CoordinatorLayout
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
+import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.model.RoomDevice
 import kotlinx.android.synthetic.main.activity_booking.*
@@ -24,8 +27,9 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
     var mAdapter: FormAdapter? = null
 
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
+    var mDatePicker: DatePickerDialog? = null
 
-    override fun getDataSet():Array<FormRow>? {
+    override fun getDataSet(): Array<FormRow>? {
         return mAdapter?.mDataList
     }
 
@@ -45,7 +49,6 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
         if (intent.extras != null && intent.extras.containsKey("detail")) {
             val detail: RoomDetail = intent.extras["detail"] as RoomDetail
-//        val detail = RoomDetail("1","逸夫楼503","教室",20,"南区逸夫楼","",mutableListOf(true,true,true),"")
             titleText.text = detail.name
             locationText.text = detail.location
             appendText.text = detail.append
@@ -67,9 +70,35 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
                 appbar.stateListAnimator = null
             }
         }
+        initLegend()
         mAdapter = FormAdapter(this, Array(28) { RoomBookingActivity.FormRow("", Array(7) { 0 }) })
         formView.setAdapter(mAdapter)
         mPresenter.loadRoomOccupationData("1", "1")
+        val calendar = Calendar.getInstance()
+        mDatePicker = DatePickerDialog(this,
+                { _, year, month, dayOfMonth ->
+                    selector.text = getString(R.string.date_format, year.toString(), (month + 1).toString(), dayOfMonth.toString())
+                }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH] + 1)
+        mDatePicker?.datePicker?.minDate = System.currentTimeMillis()
+    }
+
+    private fun initLegend() {
+        var drawable = ContextCompat.getDrawable(this, R.drawable.drawable_color_closed)
+        val drawableSize = (closedLegend.paint.fontMetrics.bottom - closedLegend.paint.fontMetrics.top).toInt()
+        drawable.setBounds(0, 0, drawableSize, drawableSize)
+        closedLegend.setCompoundDrawables(drawable, null, null, null)
+
+        drawable = ContextCompat.getDrawable(this, R.drawable.drawable_color_available)
+        drawable.setBounds(0, 0, drawableSize, drawableSize)
+        availableLegend.setCompoundDrawables(drawable, null, null, null)
+
+        drawable = ContextCompat.getDrawable(this, R.drawable.drawable_color_selected)
+        drawable.setBounds(0, 0, drawableSize, drawableSize)
+        selectedLegend.setCompoundDrawables(drawable, null, null, null)
+
+        drawable = ContextCompat.getDrawable(this, R.drawable.drawable_color_occupied)
+        drawable.setBounds(0, 0, drawableSize, drawableSize)
+        occupiedLegend.setCompoundDrawables(drawable, null, null, null)
     }
 
 
@@ -79,18 +108,20 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val fraction = verticalOffset / (supportActionBar?.height!! - appBarLayout.height + mStatusBarHeight)
             val elevation = 8f * fraction //12f or 0f
-            ViewCompat.setElevation(selector, elevation)
-            ViewCompat.setElevation(appbar, elevation)
+            roomNameTitle.post {
+                ViewCompat.setElevation(selector, elevation)
+                ViewCompat.setElevation(appbar, elevation)
+                if (fraction == 1) {
+                    roomNameTitle.text = titleText.text
+                } else {
+                    roomNameTitle.text = ""
+                }
+            }
         }
         val sDateFormat = SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault())
         selector.text = sDateFormat.format(java.util.Date())
         selector.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            DatePickerDialog(this,
-                    { _, year, month, dayOfMonth ->
-                        selector.text = getString(R.string.date_format, year.toString(), (month + 1).toString(), dayOfMonth.toString())
-                    }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH])
-                    .show()
+            mDatePicker?.show()
         }
     }
 

@@ -17,9 +17,10 @@ import com.graduation.design.bestellen.R
  */
 
 abstract class BaseActivity : AppCompatActivity() {
+    protected var mShowTransparentStatus = true
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21 && mShowTransparentStatus) {
             val decorView: View = window.decorView
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             decorView.systemUiVisibility = option

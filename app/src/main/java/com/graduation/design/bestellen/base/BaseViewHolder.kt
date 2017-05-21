@@ -7,7 +7,7 @@ import android.widget.TextView
 
 /**
  * Created by pan on 2017/5/5.
- * sparse array cache view
+ * use sparse array cache view
  */
 class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var mViews: SparseArray<View> = SparseArray()

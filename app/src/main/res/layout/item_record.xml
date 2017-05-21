@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp"
+    >
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        tools:text="逸夫楼"/>
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/nameText"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/nameText"
+        android:layout_toRightOf="@id/nameText"
+        tools:text="15年10月20日"/>
+
+    <TextView
+        android:id="@+id/periodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameText"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        tools:text="预约时间：13:00-15:00"/>
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/periodText"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="18sp"
+        android:layout_toLeftOf="@+id/changeButton"
+        android:layout_toStartOf="@+id/changeButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        tools:text="请耐心等待审核"/>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/cpb_blue"
+        android:padding="4dp"
+        android:textColor="@android:color/white"
+        tools:text="审核中"/>
+
+    <TextView
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/messageText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:padding="8dp"
+        android:text="@string/cancel"
+        android:textColor="#b71c1c"/>
+
+    <TextView
+        android:id="@+id/changeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cancelButton"
+        android:layout_toLeftOf="@+id/cancelButton"
+        android:layout_toStartOf="@+id/cancelButton"
+        android:clickable="true"
+        android:padding="8dp"
+        android:text="@string/change"
+        android:textColor="@android:color/black"/>
+
+</RelativeLayout>

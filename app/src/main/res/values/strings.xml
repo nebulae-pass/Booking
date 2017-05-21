@@ -20,6 +20,25 @@
     <string name="error_invalid_ag_input">两次输入密码不一致</string>
     <string name="action_settings">Settings</string>
 
+    <!--booking-->
+    <string name="booking_period">预约时间：%1$s</string>
+    <string name="under_review">审核中</string>
+    <string name="review_success">审核通过</string>
+    <string name="review_failed">未通过</string>
+
+    <!--operation-->
+    <string name="cancel">取消</string>
+    <string name="change">变更</string>
+
+    <string name="support_microphone">提供麦克风</string>
+    <string name="support_net">提供网络</string>
+    <string name="support_projection">提供投影设备</string>
+
+    <string name="status_closed">未开放</string>
+    <string name="status_available">可预约</string>
+    <string name="status_selected">已选择</string>
+    <string name="status_occupied">被占用</string>
+
     <string name="operation_accessing">操作进行中，请稍后</string>
     <string name="under_verify">验证中，请稍后</string>
 </resources>

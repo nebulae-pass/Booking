@@ -10,6 +10,7 @@ import android.view.ViewGroup
 
 /**
  * Created by pan on 2017/5/19.
+ * BaseDialog
  */
 abstract class BaseDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

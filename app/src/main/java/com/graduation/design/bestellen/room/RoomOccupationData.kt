@@ -31,18 +31,6 @@ class RoomOccupationData : RemoteDataRepository() {
                     onFailed(e.toString())
                     Logs.e(e.toString())
                 })
-//        occupyList.add(OccupyTime(0, 3))
-//        occupyList.add(OccupyTime(5, 10))
-//
-//
-//        val dataList = ArrayList <DailyRoomOccupation>()
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
-//        dataList.add(DailyRoomOccupation("a", "a", occupyList, OccupyTime(0, 20)))
     }
 
     interface RoomService {

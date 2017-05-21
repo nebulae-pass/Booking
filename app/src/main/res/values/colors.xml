@@ -7,4 +7,7 @@
     <color name="room_occupied_color">#55f48fb1</color>
     <color name="room_closed_color">#757575</color>
     <color name="room_selected_color">#55448aff</color>
+    <color name="review_success_color">#00c853</color>
+    <color name="review_failed_color">#b71c1c</color>
+    <color name="review_under_color">#64b5f6</color>
 </resources>
