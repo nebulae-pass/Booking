@@ -44,10 +44,6 @@ data class DailyRoomOccupation(val rid: String,
     }
 }
 
-data class WeeklyRoomOccupation(val rid: String,
-                                val weeklyOccupy: SparseArray<DailyRoomOccupation>)
-
-
 data class OccupyTime(val id: Int = 0,
                       val start: Int,
                       val end: Int)

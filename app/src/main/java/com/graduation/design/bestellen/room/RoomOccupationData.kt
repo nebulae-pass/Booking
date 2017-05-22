@@ -3,7 +3,6 @@ package com.graduation.design.bestellen.room
 import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository
 import com.graduation.design.bestellen.model.DailyRoomOccupation
-import com.graduation.design.bestellen.model.OccupyTime
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,16 +15,14 @@ import retrofit2.http.Path
  * room occupationData
  */
 class RoomOccupationData : RemoteDataRepository() {
-    fun getRoomOccupation(rid: String, onSuccess: (List<DailyRoomOccupation>) -> Unit,
-                onFailed: (String) -> Unit) {
+    fun getRoomOccupation(rid: String, date: String, period: String, onSuccess: (List<DailyRoomOccupation>) -> Unit,
+                          onFailed: (String) -> Unit) {
         val service = mRetrofit.create(RoomService::class.java)
-        service.getRoomOccupation(rid)
+        service.getRoomOccupation(rid, date, period)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
                     val result = response.body()
-                    result.forEach { Logs.v(it.toString()) }
-
                     onSuccess(result)
                 }, { e ->
                     onFailed(e.toString())
@@ -34,8 +31,9 @@ class RoomOccupationData : RemoteDataRepository() {
     }
 
     interface RoomService {
-        @GET("/room_occupied/{rid}")
-        fun getRoomOccupation(@Path("rid") rid: String): Observable<Response<List<DailyRoomOccupation>>>
+        @GET("/room_occupied/{rid}/{date}/{period}")
+        fun getRoomOccupation(@Path("rid") rid: String, @Path("date") date: String, @Path("period") period: String)
+                : Observable<Response<List<DailyRoomOccupation>>>
 
     }
 }

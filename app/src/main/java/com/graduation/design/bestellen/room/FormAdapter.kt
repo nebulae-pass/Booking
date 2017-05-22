@@ -13,7 +13,7 @@ class FormAdapter(context: Context, dataList: Array<RoomBookingActivity.FormRow>
     val mContext = context
     val mDataList = dataList
 
-    val title = Array(8) { it ->
+    val mTitle = Array(8) { it ->
         if (it == 0) {
             return@Array "时间段"
         }
@@ -24,7 +24,7 @@ class FormAdapter(context: Context, dataList: Array<RoomBookingActivity.FormRow>
         cell.isClickable = false
         if (cell is StringFormCell) {
             if (rowNumber == 0) {
-                cell.content = title[colNumber]
+                cell.content = mTitle[colNumber]
                 return
             } else {
                 cell.content = mDataList[rowNumber - 1].period

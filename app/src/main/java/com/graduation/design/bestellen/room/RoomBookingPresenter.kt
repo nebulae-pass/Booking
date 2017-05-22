@@ -15,7 +15,7 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
     }
 
     override fun loadRoomOccupationData(rid: String, date: String, period: Int) {
-        mData.getRoomOccupation(rid, onSuccess = { it ->
+        mData.getRoomOccupation(rid, date, period.toString(), onSuccess = { it ->
             getFormDataBy(it, mView.getDataSet())
         }, onFailed = { it ->
 
@@ -29,7 +29,7 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
         for (j in 0..6) {
             val oc = list[j]
             val occupation = oc.occupyList
-            for (i in 0..oc.openingTime.start) {
+            for (i in 0..oc.openingTime.start - 1) {
                 data[i].statusList[j] = -1
             }
             for (i in oc.openingTime.end..27) {

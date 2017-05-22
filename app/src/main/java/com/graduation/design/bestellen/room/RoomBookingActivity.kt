@@ -1,7 +1,6 @@
 package com.graduation.design.bestellen.room
 
 import android.app.DatePickerDialog
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
@@ -11,7 +10,6 @@ import android.support.v4.view.ViewCompat
 import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.model.RoomDevice
 import kotlinx.android.synthetic.main.activity_booking.*
@@ -28,6 +26,8 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
     var mDatePicker: DatePickerDialog? = null
+
+    val mDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     override fun getDataSet(): Array<FormRow>? {
         return mAdapter?.mDataList
@@ -47,16 +47,12 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
-        if (intent.extras != null && intent.extras.containsKey("detail")) {
-            val detail: RoomDetail = intent.extras["detail"] as RoomDetail
-            titleText.text = detail.name
-            locationText.text = detail.location
-            appendText.text = detail.append
-            capacityText.text = detail.capacity.toString()
-            netEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.net]) View.VISIBLE else View.GONE
-            projectionEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.projection]) View.VISIBLE else View.GONE
-            micEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.microphone]) View.VISIBLE else View.GONE
-        }
+        val calendar = Calendar.getInstance()
+        mDatePicker = DatePickerDialog(this,
+                { _, year, month, dayOfMonth ->
+                    selector.text = getString(R.string.date_format, year.toString(), (month + 1).toString(), dayOfMonth.toString())
+                }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH] + 1)
+        mDatePicker?.datePicker?.minDate = System.currentTimeMillis()
 
         mStatusBarHeight = getStatusBarHeight()
         formView.post {
@@ -73,13 +69,18 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         initLegend()
         mAdapter = FormAdapter(this, Array(28) { RoomBookingActivity.FormRow("", Array(7) { 0 }) })
         formView.setAdapter(mAdapter)
-        mPresenter.loadRoomOccupationData("1", "1")
-        val calendar = Calendar.getInstance()
-        mDatePicker = DatePickerDialog(this,
-                { _, year, month, dayOfMonth ->
-                    selector.text = getString(R.string.date_format, year.toString(), (month + 1).toString(), dayOfMonth.toString())
-                }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH] + 1)
-        mDatePicker?.datePicker?.minDate = System.currentTimeMillis()
+        if (intent.extras != null && intent.extras.containsKey("detail")) {
+            val detail: RoomDetail = intent.extras["detail"] as RoomDetail
+            titleText.text = detail.name
+            locationText.text = detail.location
+            appendText.text = detail.append
+            capacityText.text = detail.capacity.toString()
+            netEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.net]) View.VISIBLE else View.GONE
+            projectionEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.projection]) View.VISIBLE else View.GONE
+            micEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.microphone]) View.VISIBLE else View.GONE
+
+            mPresenter.loadRoomOccupationData(detail.rid, mDateFormat.format(Date()))
+        }
     }
 
     private fun initLegend() {

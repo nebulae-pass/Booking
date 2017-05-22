@@ -4,6 +4,7 @@ import com.graduation.design.bestellen.base.BasePresenter
 
 /**
  * Created by pan on 2017/5/11.
+ * room booing contract
  */
 interface RoomBookingContract {
     interface View {
