@@ -1,6 +1,8 @@
 package com.graduation.design.bestellen.room
 
 import com.graduation.design.bestellen.model.DailyRoomOccupation
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by pan on 2017/5/11.
@@ -10,6 +12,7 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
     val mData = data
     val mView = view
 
+    val mDateFormat = SimpleDateFormat("MM-dd", Locale.getDefault())
     override fun start() {
 
     }
@@ -22,27 +25,33 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
         })
     }
 
-    fun getFormDataBy(list: List<DailyRoomOccupation>, data: Array<RoomBookingActivity.FormRow>?) {
+    fun getFormDataBy(list: List<DailyRoomOccupation>, data: FormAdapter.FormData?) {
         if (data == null) {
             return
         }
+        val row = data.row
         for (j in 0..6) {
             val oc = list[j]
             val occupation = oc.occupyList
             for (i in 0..oc.openingTime.start - 1) {
-                data[i].statusList[j] = -1
+                row[i].statusList[j] = -1
             }
             for (i in oc.openingTime.end..27) {
-                data[i].statusList[j] = -1
+                row[i].statusList[j] = -1
             }
             occupation.forEach {
                 for (i in it.start..it.end - 1) {
-                    data[i].statusList[j] = 1
+                    row[i].statusList[j] = 1
                 }
             }
             for (i in 0..27) {
-                data[i].period = getTime(i)
+                row[i].period = getTime(i)
             }
+        }
+        data.title.clear()
+        data.title.add("时间段")
+        for (i in 0..list.size - 1) {
+            data.title.add(mDateFormat.format(list[i].date))
         }
     }
 

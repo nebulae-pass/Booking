@@ -8,7 +8,7 @@ import com.graduation.design.bestellen.base.BasePresenter
  */
 interface RoomBookingContract {
     interface View {
-        fun getDataSet():Array<RoomBookingActivity.FormRow>?
+        fun getDataSet():FormAdapter.FormData?
         fun updateForm()
     }
 

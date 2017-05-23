@@ -10,11 +10,13 @@ import android.support.v4.view.ViewCompat
 import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
+import com.graduation.design.bestellen.common.Utils
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.model.RoomDevice
 import kotlinx.android.synthetic.main.activity_booking.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
@@ -27,10 +29,9 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
     var mDatePicker: DatePickerDialog? = null
 
-    val mDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-    override fun getDataSet(): Array<FormRow>? {
-        return mAdapter?.mDataList
+    override fun getDataSet(): FormAdapter.FormData? {
+        return mAdapter?.mData
     }
 
     override fun updateForm() {
@@ -67,7 +68,7 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             }
         }
         initLegend()
-        mAdapter = FormAdapter(this, Array(28) { RoomBookingActivity.FormRow("", Array(7) { 0 }) })
+        mAdapter = FormAdapter(this, FormAdapter.FormData(ArrayList(), Array(28) { FormAdapter.FormRow("", Array(7) { 0 }) }))
         formView.setAdapter(mAdapter)
         if (intent.extras != null && intent.extras.containsKey("detail")) {
             val detail: RoomDetail = intent.extras["detail"] as RoomDetail
@@ -79,7 +80,7 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             projectionEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.projection]) View.VISIBLE else View.GONE
             micEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.microphone]) View.VISIBLE else View.GONE
 
-            mPresenter.loadRoomOccupationData(detail.rid, mDateFormat.format(Date()))
+            mPresenter.loadRoomOccupationData(detail.rid, Utils.formatDate(Date()))
         }
     }
 
@@ -133,25 +134,6 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             result = resources.getDimensionPixelSize(resourceId)
         }
         return result
-    }
-
-
-    /**
-     *-1 closed
-     * 0 available
-     * 1 occupied
-     * 2 selected
-     */
-    data class FormRow(
-            var period: String,
-            val statusList: Array<Int>
-    ) {
-        fun getRowContent(colNumber: Int): Any {
-            if (colNumber == 0) return period
-            else return statusList[colNumber - 1]
-        }
-
-        fun getSize() = statusList.size + 1
     }
 
 }

@@ -49,6 +49,8 @@ class StatusCell(context: Context) : FormCell(context) {
         setBackgroundColor(colorRes)
     }
 
+    fun getStatus():Status = mStatus
+
     override fun draw(canvas: Canvas?) {
     }
 
