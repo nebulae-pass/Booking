@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.room
 
 import com.graduation.design.bestellen.model.DailyRoomOccupation
+import com.graduation.design.bestellen.model.OccupyTime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -9,8 +10,8 @@ import java.util.*
  * room booking presenter
  */
 class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationData) : RoomBookingContract.Presenter {
-    val mData = data
-    val mView = view
+    private val mData = data
+    private val mView = view
 
     val mDateFormat = SimpleDateFormat("MM-dd", Locale.getDefault())
     override fun start() {
@@ -20,9 +21,14 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
     override fun loadRoomOccupationData(rid: String, date: String, period: Int) {
         mData.getRoomOccupation(rid, date, period.toString(), onSuccess = { it ->
             getFormDataBy(it, mView.getDataSet())
+            mView.updateForm()
         }, onFailed = { it ->
 
         })
+    }
+
+    override fun commitReservation(rid: String, date: String, occupyTime: OccupyTime, onSuccess: () -> Unit, onFailed: (e: String) -> Unit) {
+
     }
 
     fun getFormDataBy(list: List<DailyRoomOccupation>, data: FormAdapter.FormData?) {

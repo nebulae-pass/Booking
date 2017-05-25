@@ -161,7 +161,7 @@
             android:id="@+id/closedLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
+            android:drawablePadding="2dp"
             android:text="@string/status_closed"
             android:textColor="#424242"/>
 
@@ -169,8 +169,8 @@
             android:id="@+id/availableLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:paddingLeft="8dp"
+            android:drawablePadding="2dp"
+            android:paddingLeft="4dp"
             android:text="@string/status_available"
             android:textColor="#424242"/>
 
@@ -178,8 +178,8 @@
             android:id="@+id/selectedLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:paddingLeft="8dp"
+            android:drawablePadding="2dp"
+            android:paddingLeft="4dp"
             android:text="@string/status_selected"
             android:textColor="#424242"/>
 
@@ -187,8 +187,8 @@
             android:id="@+id/occupiedLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
-            android:paddingLeft="8dp"
+            android:drawablePadding="2dp"
+            android:paddingLeft="4dp"
             android:text="@string/status_occupied"
             android:textColor="#424242"/>
     </LinearLayout>

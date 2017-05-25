@@ -67,6 +67,13 @@ data class Record(val id: Long,
                   val status: Int,
                   val message: String)
 
+data class ReservationData(val rid: String,
+                           val uid: String,
+                           val applyMessage:String,
+                           val date:String,
+                           val occupyTime: OccupyTime)
+
+
 class RoomDevice {
     companion object {
         val net = 0

@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.room
 
 import android.content.Context
+import com.nebula.utils.DensityUtil
 import com.nebula.wheel.FormCell
 import com.nebula.wheel.FormView
 import com.nebula.wheel.StringFormCell
@@ -10,12 +11,13 @@ import java.util.*
  * Created by pan on 2017/5/11.
  * form adapter
  */
-class FormAdapter(context: Context, data:FormData) : FormView.BaseAdapter<FormCell>() {
+class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormCell>() {
     val mData = data
     val mContext = context
     val mDataList = data.row
 
     val mTitle = data.title
+
     init {
         mTitle.add("时间段")
         for (i in 0..6) {
@@ -57,7 +59,9 @@ class FormAdapter(context: Context, data:FormData) : FormView.BaseAdapter<FormCe
 
     override fun createCell(rowNumber: Int, colNumber: Int): FormCell {
         if (rowNumber == 0 || colNumber == 0) {
-            return StringFormCell(mContext)
+            val cell = StringFormCell(mContext)
+            cell.setTextSize(DensityUtil.dip2Px(mContext, 18f))
+            return cell
         }
         return StatusCell(mContext)
     }
@@ -83,7 +87,7 @@ class FormAdapter(context: Context, data:FormData) : FormView.BaseAdapter<FormCe
     }
 
     data class FormData(val title: ArrayList<String>,
-                        val row: Array<FormRow>){
+                        val row: Array<FormRow>) {
         override fun equals(other: Any?): Boolean {
             return super.equals(other)
         }

@@ -3,11 +3,15 @@ package com.graduation.design.bestellen.room
 import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository
 import com.graduation.design.bestellen.model.DailyRoomOccupation
+import com.graduation.design.bestellen.model.RequestResult
+import com.graduation.design.bestellen.model.ReservationData
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 /**
@@ -30,10 +34,30 @@ class RoomOccupationData : RemoteDataRepository() {
                 })
     }
 
+    fun getBookingRoomResult(data: ReservationData, onSuccess: () -> Unit, onFailed: (String) -> Unit) {
+        val service = mRetrofit.create(RoomService::class.java)
+        service.bookingRoom(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                    val result = response.body()
+                    if (result.code == 0) {
+                        onSuccess()
+                    } else {
+                        onFailed(result.message)
+                    }
+                }, { e ->
+                    onFailed(e.toString())
+                    Logs.e(e.toString())
+                })
+    }
+
     interface RoomService {
         @GET("/room_occupied/{rid}/{date}/{period}")
         fun getRoomOccupation(@Path("rid") rid: String, @Path("date") date: String, @Path("period") period: String)
                 : Observable<Response<List<DailyRoomOccupation>>>
 
+        @POST()
+        fun bookingRoom(@Body data: ReservationData): Observable<Response<RequestResult>>
     }
 }

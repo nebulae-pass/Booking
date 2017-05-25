@@ -29,6 +29,8 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
     var mDatePicker: DatePickerDialog? = null
 
+    lateinit var roomDetail:RoomDetail
+
 
     override fun getDataSet(): FormAdapter.FormData? {
         return mAdapter?.mData
@@ -72,6 +74,7 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         formView.setAdapter(mAdapter)
         if (intent.extras != null && intent.extras.containsKey("detail")) {
             val detail: RoomDetail = intent.extras["detail"] as RoomDetail
+            roomDetail = detail
             titleText.text = detail.name
             locationText.text = detail.location
             appendText.text = detail.append
@@ -105,7 +108,8 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
 
     override fun initListener() {
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
+//            mPresenter.commitReservation(roomDetail.rid, )
         }
         appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val fraction = verticalOffset / (supportActionBar?.height!! - appBarLayout.height + mStatusBarHeight)
