@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.main.reservation
+package com.graduation.design.bestellen.function.main.reservation
 
 import android.content.Context
 import com.graduation.design.bestellen.R

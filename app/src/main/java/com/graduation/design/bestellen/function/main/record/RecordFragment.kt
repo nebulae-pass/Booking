@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.main.record
+package com.graduation.design.bestellen.function.main.record
 
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager

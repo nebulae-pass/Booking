@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.room
+package com.graduation.design.bestellen.function.room
 
 import android.app.DatePickerDialog
 import android.os.Build
@@ -10,9 +10,13 @@ import android.support.v4.view.ViewCompat
 import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
+import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.common.Utils
+import com.graduation.design.bestellen.function.commit.CommitActivity
+import com.graduation.design.bestellen.model.OccupyTime
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.model.RoomDevice
+import com.nebula.wheel.FormView
 import kotlinx.android.synthetic.main.activity_booking.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,7 +33,9 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
     var mDatePicker: DatePickerDialog? = null
 
-    lateinit var roomDetail:RoomDetail
+    lateinit var roomDetail: RoomDetail
+
+    lateinit var mSelectedDate: String
 
 
     override fun getDataSet(): FormAdapter.FormData? {
@@ -83,7 +89,8 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             projectionEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.projection]) View.VISIBLE else View.GONE
             micEnableIcon.visibility = if (detail.deviceEnable[RoomDevice.microphone]) View.VISIBLE else View.GONE
 
-            mPresenter.loadRoomOccupationData(detail.rid, Utils.formatDate(Date()))
+            mSelectedDate = Utils.formatDate(Date())
+            mPresenter.loadRoomOccupationData(detail.rid, mSelectedDate)
         }
     }
 
@@ -109,7 +116,14 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
     override fun initListener() {
         fab.setOnClickListener { _ ->
-//            mPresenter.commitReservation(roomDetail.rid, )
+            if (mAdapter == null) {
+                return@setOnClickListener
+            }
+            if (!(mAdapter as FormAdapter).isSelectedCompleted()) {
+                snack(coordinatorLayout, "请选择预约时段")
+                return@setOnClickListener
+            }
+            CommitActivity.start(this, roomDetail, Account.account, (mAdapter as FormAdapter).getSelectedDate(), (mAdapter as FormAdapter).getSelectedOccupyTime())
         }
         appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val fraction = verticalOffset / (supportActionBar?.height!! - appBarLayout.height + mStatusBarHeight)

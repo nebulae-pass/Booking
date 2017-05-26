@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.graduation.design.bestellen.room.RoomBookingActivity">
+    android:id="@+id/coordinatorLayout"
+    tools:context=".function.room.RoomBookingActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -208,6 +209,6 @@
         app:fabSize="mini"
         app:layout_anchor="@id/selector"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        app:srcCompat="@drawable/ic_done"/>
 
 </android.support.design.widget.CoordinatorLayout>

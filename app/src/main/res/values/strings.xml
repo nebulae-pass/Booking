@@ -29,6 +29,12 @@
     <!--operation-->
     <string name="cancel">取消</string>
     <string name="change">变更</string>
+    <string name="commit">提交</string>
+    <string name="apply_commit">申请记录提交</string>
+    <string name="apply_date">预约日期：%1$s</string>
+    <string name="apply_time">预约时间段：%1$s-%2$s</string>
+    <string name="meeting_content">会议内容</string>
+    <string name="please_input_content">请输入会议内容</string>
 
     <string name="support_microphone">提供麦克风</string>
     <string name="support_net">提供网络</string>

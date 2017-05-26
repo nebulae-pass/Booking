@@ -44,9 +44,22 @@ data class DailyRoomOccupation(val rid: String,
     }
 }
 
+@Suppress("unused")
+@PaperParcel
 data class OccupyTime(val id: Int = 0,
                       val start: Int,
-                      val end: Int)
+                      val end: Int):PaperParcelable{
+    companion object{
+        @JvmField val CREATOR = PaperParcelOccupyTime.CREATOR
+    }
+
+    override fun describeContents(): Int = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        PaperParcelOccupyTime.writeToParcel(this, dest, flags)
+    }
+}
+
 
 data class ApplyInfo(val uid: String,
                      val rid: String,

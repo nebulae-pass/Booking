@@ -1,12 +1,12 @@
-package com.graduation.design.bestellen.main
+package com.graduation.design.bestellen.function.main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.login.LoginDialog
-import com.graduation.design.bestellen.main.record.RecordFragment
-import com.graduation.design.bestellen.main.reservation.ReservationFragment
+import com.graduation.design.bestellen.function.login.LoginDialog
+import com.graduation.design.bestellen.function.main.record.RecordFragment
+import com.graduation.design.bestellen.function.main.reservation.ReservationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

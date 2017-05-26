@@ -44,7 +44,7 @@ abstract class BaseFragment : Fragment() {
 
     open fun initViews(): Unit {}
 
-    inline fun <reified T: Activity> Fragment.startActivity(vararg params:Pair<String, Parcelable>) {
+    inline fun <reified T: Activity> Fragment.navigate(vararg params:Pair<String, Parcelable>) {
         val intent = Intent(activity, T::class.java)
         params.forEach { intent.putExtra(it.first, it.second) }
         startActivity(intent)

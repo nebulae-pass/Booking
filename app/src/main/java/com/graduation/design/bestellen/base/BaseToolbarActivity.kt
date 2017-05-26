@@ -27,6 +27,7 @@ abstract class BaseToolbarActivity : BaseActivity() {
 
     fun setToolbarTitle(title: String) {
         supportActionBar?.title = title
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }
 

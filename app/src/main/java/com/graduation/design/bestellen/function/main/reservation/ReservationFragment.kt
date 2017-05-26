@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.main.reservation
+package com.graduation.design.bestellen.function.main.reservation
 
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.graduation.design.bestellen.base.BaseFragment
 import com.graduation.design.bestellen.model.RoomDetail
-import com.graduation.design.bestellen.room.RoomBookingActivity
+import com.graduation.design.bestellen.function.room.RoomBookingActivity
 import kotlinx.android.synthetic.main.fragment_reservation.*
 
 /**
@@ -52,7 +52,7 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
         mAdapter = ReservationAdapter(activity, ArrayList())
         mAdapter?.setOnItemClickListener { _, position ->
             val detail = mAdapter?.mDataSet?.get(position)
-            startActivity<RoomBookingActivity>(Pair("detail", detail as RoomDetail))
+            navigate<RoomBookingActivity>(Pair("detail", detail as RoomDetail))
         }
         recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
         recyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL), 0)

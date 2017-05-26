@@ -7,7 +7,7 @@ package com.graduation.design.bestellen.common
 object Account {
 
     var account: String
-        get() = account
+        get() = "1"
         set(value) {
             account = value
         }

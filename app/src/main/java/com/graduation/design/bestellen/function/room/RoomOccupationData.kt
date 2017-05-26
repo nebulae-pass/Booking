@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.room
+package com.graduation.design.bestellen.function.room
 
 import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository

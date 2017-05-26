@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.room
+package com.graduation.design.bestellen.function.room
 
 import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
@@ -15,7 +15,6 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
 
     val mDateFormat = SimpleDateFormat("MM-dd", Locale.getDefault())
     override fun start() {
-
     }
 
     override fun loadRoomOccupationData(rid: String, date: String, period: Int) {

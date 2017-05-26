@@ -1,4 +1,4 @@
-package com.graduation.design.bestellen.main.record
+package com.graduation.design.bestellen.function.main.record
 
 import android.content.Context
 import android.widget.TextView

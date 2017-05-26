@@ -1,6 +1,9 @@
-package com.graduation.design.bestellen.room
+package com.graduation.design.bestellen.function.room
 
 import android.content.Context
+import android.text.TextUtils
+import com.graduation.design.bestellen.common.Logs
+import com.graduation.design.bestellen.model.OccupyTime
 import com.nebula.utils.DensityUtil
 import com.nebula.wheel.FormCell
 import com.nebula.wheel.FormView
@@ -17,6 +20,10 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
     val mDataList = data.row
 
     val mTitle = data.title
+
+    var mSelectedColumn = -1
+    var mStart = -1
+    var mEnd = -1
 
     init {
         mTitle.add("时间段")
@@ -43,17 +50,55 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
             }
             cell.setStatus(status)
             cell.setOnCellClickListener {
-                if (cell.getStatus() == StatusCell.Status.SELECTED) {
-                    cell.setStatus(StatusCell.Status.AVAILABLE)
-                    return@setOnCellClickListener
-                }
                 if (cell.getStatus() == StatusCell.Status.AVAILABLE) {
-                    cell.setStatus(StatusCell.Status.SELECTED)
-                }
+                    if (mSelectedColumn == -1 || mSelectedColumn == colNumber) {
+                        mSelectedColumn = colNumber
+                        if (mStart == -1) {
+                            mStart = rowNumber - 1
+                        }
+                        if (mStart > rowNumber - 1) {
+                            mStart = rowNumber - 1
+                        }else{
+                            mEnd = rowNumber - 1
+                        }
+                        for (i in mStart..mEnd) {
+                            mDataList[i].statusList[colNumber - 1] = 2
+                        }
+                    } else {
+                        for (i in mStart..mEnd) {
+                            mDataList[i].statusList[mSelectedColumn - 1] = 0
+                        }
+                        mSelectedColumn = colNumber
+                        mStart = rowNumber - 1
+                        mEnd = mStart
+                        mDataList[mStart].statusList[mSelectedColumn - 1] = 2
+                    }
 
+                }else{
+                    if (mStart == rowNumber - 1) {//first cell
+                        mDataList[mStart].statusList[colNumber - 1] = 0
+                        mStart += 1
+                        if (mStart > mEnd) {
+                            mStart = -1
+                            mEnd = mStart
+                        }
+                    }else{
+                        for (i in rowNumber - 1..mEnd) {
+                            mDataList[i].statusList[colNumber - 1] = 0
+                        }
+                        mEnd = rowNumber - 2
+                    }
+                }
+                notifyDataSetChanged()
             }
         }
     }
+
+    fun isSelectedCompleted() = mSelectedColumn != -1
+
+    fun getSelectedDate() = mTitle[mSelectedColumn]
+
+    fun getSelectedOccupyTime() = OccupyTime(start = mStart, end = mEnd)
 
     override fun getRowCount() = mDataList.size + 1
 
@@ -121,5 +166,9 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
         override fun hashCode(): Int {
             return super.hashCode()
         }
+    }
+
+    fun String.isEmpty(): Boolean {
+        return TextUtils.isEmpty(this)
     }
 }

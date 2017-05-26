@@ -1,6 +1,5 @@
-package com.graduation.design.bestellen.login
+package com.graduation.design.bestellen.function.login
 
-import android.util.Log
 import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository
 import com.graduation.design.bestellen.model.RequestResult

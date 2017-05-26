@@ -1,10 +1,11 @@
-package com.graduation.design.bestellen.login
+package com.graduation.design.bestellen.function.login
 
 import com.graduation.design.bestellen.base.BasePresenter
 import com.graduation.design.bestellen.base.BaseView
 
 /**
  * Created by pan on 2017/5/19.
+ * Login Contract
  */
 interface LoginContract {
     interface View : BaseView<Presenter> {

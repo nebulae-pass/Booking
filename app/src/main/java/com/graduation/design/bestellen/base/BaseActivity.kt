@@ -2,11 +2,15 @@ package com.graduation.design.bestellen.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.os.Parcelable
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.graduation.design.bestellen.R
@@ -52,7 +56,21 @@ abstract class BaseActivity : AppCompatActivity() {
         Snackbar.make(view, text, duration)
     }
 
+    inline fun <reified T: Activity> Activity.navigate(vararg params:Pair<String, Parcelable>) {
+        val intent = Intent(this, T::class.java)
+        params.forEach { intent.putExtra(it.first, it.second) }
+        startActivity(intent)
+    }
+
     fun Context.dip2Px(dip: Float) : Float{
         return dip * resources.displayMetrics.density
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
