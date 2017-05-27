@@ -34,30 +34,13 @@ class RoomOccupationData : RemoteDataRepository() {
                 })
     }
 
-    fun getBookingRoomResult(data: ReservationData, onSuccess: () -> Unit, onFailed: (String) -> Unit) {
-        val service = mRetrofit.create(RoomService::class.java)
-        service.bookingRoom(data)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response ->
-                    val result = response.body()
-                    if (result.code == 0) {
-                        onSuccess()
-                    } else {
-                        onFailed(result.message)
-                    }
-                }, { e ->
-                    onFailed(e.toString())
-                    Logs.e(e.toString())
-                })
-    }
+
 
     interface RoomService {
         @GET("/room_occupied/{rid}/{date}/{period}")
         fun getRoomOccupation(@Path("rid") rid: String, @Path("date") date: String, @Path("period") period: String)
                 : Observable<Response<List<DailyRoomOccupation>>>
 
-        @POST()
-        fun bookingRoom(@Body data: ReservationData): Observable<Response<RequestResult>>
+
     }
 }

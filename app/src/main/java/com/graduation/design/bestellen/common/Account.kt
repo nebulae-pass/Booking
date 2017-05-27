@@ -6,9 +6,9 @@ package com.graduation.design.bestellen.common
  */
 object Account {
 
-    var account: String
-        get() = "1"
+    var account: String = ""
+        get() = field
         set(value) {
-            account = value
+            field = value
         }
 }

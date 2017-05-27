@@ -47,4 +47,7 @@
 
     <string name="operation_accessing">操作进行中，请稍后</string>
     <string name="under_verify">验证中，请稍后</string>
+    
+    <string name="capacity">会议室容纳人数</string>
+    <string name="please_input_condition">请输入会议室条件</string>
 </resources>

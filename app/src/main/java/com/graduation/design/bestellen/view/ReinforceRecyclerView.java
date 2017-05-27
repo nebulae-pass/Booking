@@ -3,6 +3,7 @@ package com.graduation.design.bestellen.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,6 +71,8 @@ public class ReinforceRecyclerView extends FrameLayout {
         recyclerView = (RecyclerView) v.findViewById(R.id.exList);
         emptyStub = (ViewStub) v.findViewById(R.id.emptyStub);
         emptyStub.setLayoutResource(emptyLayoutId);
+        refreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorPrimary),
+                ContextCompat.getColor(getContext(), R.color.colorAccent));
         initRecyclerView();
     }
 

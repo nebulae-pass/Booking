@@ -9,8 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
  * base remote repository
  */
 open class RemoteDataRepository {
-//    val BASE_URL = "http://10.0.2.2:6789/"
-    val BASE_URL = "http://www.jlulearn.cn:6789/"
+    val BASE_URL = "http://10.0.2.2:6789/"
+//    val BASE_URL = "http://www.jlulearn.cn:6789/"
 
     open val mRetrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

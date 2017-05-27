@@ -10,7 +10,8 @@ import com.graduation.design.bestellen.model.ApplyInfo
  */
 interface CommitContract {
     interface View : BaseView<Presenter> {
-
+        fun showProgressDialog(isShown: Boolean)
+        fun finishActivity()
     }
 
     interface Presenter : BasePresenter {
