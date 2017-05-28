@@ -1,6 +1,6 @@
 package com.graduation.design.bestellen.function.commit
 
-import com.graduation.design.bestellen.model.ApplyInfo
+import com.graduation.design.bestellen.model.ReservationData
 
 /**
  * Created by pan on 2017/5/26.
@@ -14,11 +14,14 @@ class CommitPresenter(view: CommitContract.View, data: CommitData) : CommitContr
     override fun start() {
     }
 
-    override fun commitReservation(applyInfo: ApplyInfo) {
+    override fun commitReservation(applyInfo: ReservationData) {
+        mView.showProgressDialog(true)
         mData.getCommitResult(applyInfo, onSuccess = {
-
+            mView.showProgressDialog(false)
+            mView.finishActivity()
         }, onFailed = { s: String ->
-
+            mView.showError(s)
+            mView.showProgressDialog(false)
         })
     }
 }

@@ -2,11 +2,8 @@ package com.graduation.design.bestellen.function.main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.common.Account
-import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.function.login.LoginDialog
 import com.graduation.design.bestellen.function.main.record.RecordFragment
 import com.graduation.design.bestellen.function.main.reservation.ReservationFragment

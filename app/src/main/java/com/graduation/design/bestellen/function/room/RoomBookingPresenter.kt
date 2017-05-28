@@ -4,6 +4,7 @@ import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by pan on 2017/5/11.
@@ -18,11 +19,15 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
     }
 
     override fun loadRoomOccupationData(rid: String, date: String, period: Int) {
+        mView.showLoadingDialog(true)
         mData.getRoomOccupation(rid, date, period.toString(), onSuccess = { it ->
             getFormDataBy(it, mView.getDataSet())
+            mView.setRawData(it as ArrayList<DailyRoomOccupation>)
             mView.updateForm()
+            mView.showLoadingDialog(false)
         }, onFailed = { it ->
-
+            mView.showLoadingDialog(false)
+            mView.showSnack(it)
         })
     }
 
@@ -45,7 +50,7 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
                 row[i].statusList[j] = -1
             }
             occupation.forEach {
-                for (i in it.start..it.end - 1) {
+                for (i in it.start..it.end) {
                     row[i].statusList[j] = 1
                 }
             }

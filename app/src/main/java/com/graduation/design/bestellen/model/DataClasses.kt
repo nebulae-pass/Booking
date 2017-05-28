@@ -61,23 +61,17 @@ data class OccupyTime(val id: Int = 0,
 }
 
 
-data class ApplyInfo(val uid: String,
-                     val rid: String,
-                     val date: Date,
-                     val occupyTime: OccupyTime,
-                     val applyAppend: String)
-
 data class User(val account: String,
                 val password: String)
 
 data class RequestResult(val code: Int,
                          val message: String)
 
-data class Record(val id: Long,
+data class Record(val uid:String,
                   val name: String,
                   val date: Date,
                   val period: OccupyTime,
-                  val status: Int,
+                  val status: Int,/*1:Under review 2:success 3:failed 4.out of date*/
                   val message: String)
 
 data class ReservationData(val rid: String,

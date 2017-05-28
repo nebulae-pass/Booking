@@ -1,6 +1,8 @@
 package com.graduation.design.bestellen.function.room
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
@@ -11,12 +13,14 @@ import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
 import com.graduation.design.bestellen.common.Account
+import com.graduation.design.bestellen.common.LoadingDialog
 import com.graduation.design.bestellen.common.Utils
 import com.graduation.design.bestellen.function.commit.CommitActivity
-import com.graduation.design.bestellen.model.OccupyTime
+import com.graduation.design.bestellen.function.login.LoginDialog
+import com.graduation.design.bestellen.function.login.LoginManager
+import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.RoomDetail
 import com.graduation.design.bestellen.model.RoomDevice
-import com.nebula.wheel.FormView
 import kotlinx.android.synthetic.main.activity_booking.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,6 +36,7 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
     val mPresenter = RoomBookingPresenter(this, RoomOccupationData())
     var mDatePicker: DatePickerDialog? = null
+    val mLoadingDialog = LoadingDialog()
 
     lateinit var roomDetail: RoomDetail
 
@@ -40,6 +45,22 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
 
     override fun getDataSet(): FormAdapter.FormData? {
         return mAdapter?.mData
+    }
+
+    override fun setRawData(rawData: ArrayList<DailyRoomOccupation>) {
+        mAdapter?.mRawData = rawData
+    }
+
+    override fun showLoadingDialog(isShow: Boolean) {
+        if (isShow) {
+            mLoadingDialog.showDialog(supportFragmentManager)
+        }else{
+            mLoadingDialog.dismiss()
+        }
+    }
+
+    override fun showSnack(message: String) {
+        snack(coordinatorLayout, message)
     }
 
     override fun updateForm() {
@@ -119,11 +140,15 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
             if (mAdapter == null) {
                 return@setOnClickListener
             }
+            if (!LoginManager.isLogin()) {
+                LoginDialog().showDialog(supportFragmentManager)
+                return@setOnClickListener
+            }
             if (!(mAdapter as FormAdapter).isSelectedCompleted()) {
                 snack(coordinatorLayout, "请选择预约时段")
                 return@setOnClickListener
             }
-            CommitActivity.start(this, roomDetail, Account.account, (mAdapter as FormAdapter).getSelectedDate(), (mAdapter as FormAdapter).getSelectedOccupyTime())
+            CommitActivity.startForResult(this, roomDetail, Account.account, (mAdapter as FormAdapter).getSelectedDate(), (mAdapter as FormAdapter).getSelectedOccupyTime())
         }
         appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val fraction = verticalOffset / (supportActionBar?.height!! - appBarLayout.height + mStatusBarHeight)
@@ -142,6 +167,13 @@ class RoomBookingActivity : BaseActivity(), RoomBookingContract.View {
         selector.text = sDateFormat.format(java.util.Date())
         selector.setOnClickListener {
             mDatePicker?.show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            mPresenter.loadRoomOccupationData(roomDetail.rid, mSelectedDate)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.graduation.design.bestellen.function.room
 
 import com.graduation.design.bestellen.base.BasePresenter
+import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
 
 /**
@@ -11,6 +12,9 @@ interface RoomBookingContract {
     interface View {
         fun getDataSet(): FormAdapter.FormData?
         fun updateForm()
+        fun setRawData(rawData:ArrayList<DailyRoomOccupation>)
+        fun showLoadingDialog(isShow:Boolean)
+        fun showSnack(message:String)
     }
 
     interface Presenter : BasePresenter {

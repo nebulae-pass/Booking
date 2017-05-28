@@ -56,6 +56,10 @@ class RecordAdapter(context: Context, data: ArrayList<Record>) : BaseRecyclerAda
                 strId = R.string.review_failed
                 colorId = R.color.review_failed_color
             }
+            4 -> {
+                strId = R.string.out_of_date
+                colorId = R.color.record_out_of_date_color
+            }
             else -> {
                 strId = R.string.under_review
                 colorId = R.color.review_under_color

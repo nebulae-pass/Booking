@@ -65,6 +65,14 @@
         android:layout_marginTop="4dp"
         android:hint="@string/please_input_content"/>
 
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/errorText"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/commitButton"
         android:layout_width="wrap_content"

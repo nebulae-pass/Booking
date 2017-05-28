@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Parcelable
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -52,8 +51,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun getMenuRes() = R.menu.menu_scrolling
 
-    fun Activity.snack(view: View, text: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(view, text, duration)
+    fun snack(view: View?, text: String, duration: Int = Snackbar.LENGTH_SHORT) {
+        if (view == null) {
+            return
+        }
+        Snackbar.make(view, text, duration).show()
     }
 
     inline fun <reified T: Activity> Activity.navigate(vararg params:Pair<String, Parcelable>) {

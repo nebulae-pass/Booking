@@ -25,6 +25,7 @@
     <string name="under_review">审核中</string>
     <string name="review_success">审核通过</string>
     <string name="review_failed">未通过</string>
+    <string name="out_of_date">已完成</string>
 
     <!--operation-->
     <string name="cancel">取消</string>

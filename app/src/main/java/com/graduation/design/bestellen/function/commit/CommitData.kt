@@ -2,8 +2,8 @@ package com.graduation.design.bestellen.function.commit
 
 import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.data.RemoteDataRepository
-import com.graduation.design.bestellen.model.ApplyInfo
 import com.graduation.design.bestellen.model.RequestResult
+import com.graduation.design.bestellen.model.ReservationData
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +16,7 @@ import retrofit2.http.POST
  * Remote Data
  */
 class CommitData : RemoteDataRepository() {
-    fun getCommitResult(data: ApplyInfo, onSuccess: () -> Unit, onFailed: (String) -> Unit) {
+    fun getCommitResult(data: ReservationData, onSuccess: () -> Unit, onFailed: (String) -> Unit) {
         val service = mRetrofit.create(CommitService::class.java)
         service.commitReservation(data)
                 .subscribeOn(Schedulers.io())
@@ -35,7 +35,7 @@ class CommitData : RemoteDataRepository() {
     }
 
     interface CommitService {
-        @POST()
-        fun commitReservation(@Body data: ApplyInfo): Observable<Response<RequestResult>>
+        @POST("/booking")
+        fun commitReservation(@Body data: ReservationData): Observable<Response<RequestResult>>
     }
 }

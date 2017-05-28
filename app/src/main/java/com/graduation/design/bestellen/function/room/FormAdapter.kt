@@ -2,13 +2,13 @@ package com.graduation.design.bestellen.function.room
 
 import android.content.Context
 import android.text.TextUtils
-import com.graduation.design.bestellen.common.Logs
+import com.graduation.design.bestellen.common.Utils
+import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
 import com.nebula.utils.DensityUtil
 import com.nebula.wheel.FormCell
 import com.nebula.wheel.FormView
 import com.nebula.wheel.StringFormCell
-import java.util.*
 
 /**
  * Created by pan on 2017/5/11.
@@ -18,6 +18,7 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
     val mData = data
     val mContext = context
     val mDataList = data.row
+    var mRawData = ArrayList<DailyRoomOccupation>()
 
     val mTitle = data.title
 
@@ -58,7 +59,7 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
                         }
                         if (mStart > rowNumber - 1) {
                             mStart = rowNumber - 1
-                        }else{
+                        } else {
                             mEnd = rowNumber - 1
                         }
                         for (i in mStart..mEnd) {
@@ -74,7 +75,7 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
                         mDataList[mStart].statusList[mSelectedColumn - 1] = 2
                     }
 
-                }else{
+                } else {
                     if (mStart == rowNumber - 1) {//first cell
                         mDataList[mStart].statusList[colNumber - 1] = 0
                         mStart += 1
@@ -82,7 +83,7 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
                             mStart = -1
                             mEnd = mStart
                         }
-                    }else{
+                    } else {
                         for (i in rowNumber - 1..mEnd) {
                             mDataList[i].statusList[colNumber - 1] = 0
                         }
@@ -96,7 +97,7 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
 
     fun isSelectedCompleted() = mSelectedColumn != -1
 
-    fun getSelectedDate() = mTitle[mSelectedColumn]
+    fun getSelectedDate() = Utils.formatDateByCHN(mRawData[mSelectedColumn - 1].date)
 
     fun getSelectedOccupyTime() = OccupyTime(start = mStart, end = mEnd)
 

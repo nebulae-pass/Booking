@@ -24,5 +24,13 @@ class Utils {
         fun formatDate(date:Date):String{
             return mDateFormat.format(date)
         }
+
+        fun formatDateByCHN(date:Date):String{
+            return SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault()).format(date)
+        }
+
+        fun parseByCHN(dateString: String): Date{
+            return SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault()).parse(dateString)
+        }
     }
 }

@@ -8,6 +8,6 @@ import com.graduation.design.bestellen.common.Account
  */
 class LoginManager {
     companion object {
-        fun checkLogin() = Account.account.isEmpty()
+        fun isLogin() = !Account.account.isEmpty()
     }
 }

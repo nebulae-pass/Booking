@@ -9,5 +9,6 @@
     <color name="room_selected_color">#55448aff</color>
     <color name="review_success_color">#00c853</color>
     <color name="review_failed_color">#b71c1c</color>
+    <color name="record_out_of_date_color">#9e9e9e</color>
     <color name="review_under_color">#64b5f6</color>
 </resources>

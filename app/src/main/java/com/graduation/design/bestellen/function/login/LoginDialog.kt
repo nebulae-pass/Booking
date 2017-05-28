@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseDialog
+import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.common.CommonTextWatcher
 import kotlinx.android.synthetic.main.dialog_login.*
 
@@ -30,6 +31,7 @@ class LoginDialog : BaseDialog(), LoginContract.View {
     }
 
     override fun onSuccess() {
+        Account.account = accountEditText.text.toString()
         dismiss()
         mSuccessListener(accountEditText.text.toString())
     }
