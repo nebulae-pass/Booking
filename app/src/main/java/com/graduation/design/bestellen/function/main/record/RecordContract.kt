@@ -12,10 +12,13 @@ interface RecordContract {
     interface View : BaseView<Presenter> {
         fun getDataSet(): MutableList<Record>?
         fun updateRecyclerView()
-
+        fun showRecyclerViewErrorStatus()
+        fun showLoading(isShow:Boolean)
+        fun showTips(message: String)
     }
 
     interface Presenter : BasePresenter {
         fun loadData()
+        fun refreshData()
     }
 }

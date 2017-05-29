@@ -10,6 +10,6 @@ import com.graduation.design.bestellen.common.Account
 class BestellenApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        Account.account = "111111"
+//        Account.account = "111111"
     }
 }

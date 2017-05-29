@@ -35,7 +35,7 @@ class ReservationFragment : BaseFragment(), ReservationContract.View {
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun showSnackBar(resId: Int, duration: Int) {
+    override fun showTips(resId: Int, duration: Int) {
         Snackbar.make(view as View, resId, duration).show()
     }
 

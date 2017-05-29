@@ -19,11 +19,11 @@ interface ReservationContract {
 
         fun updateRecyclerView()
 
-        fun showSnackBar(resId: Int, duration: Int = Snackbar.LENGTH_LONG)
+        fun showTips(resId: Int, duration: Int = Snackbar.LENGTH_LONG)
 
     }
 
-    interface Presenter: BasePresenter {
+    interface Presenter : BasePresenter {
         fun initData()
 
         fun loadMoreData()

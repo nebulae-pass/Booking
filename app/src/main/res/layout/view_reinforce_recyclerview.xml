@@ -20,4 +20,10 @@
         android:id="@+id/emptyStub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ViewStub
+        android:id="@+id/errorStub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </merge>

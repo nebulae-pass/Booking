@@ -51,4 +51,7 @@
     
     <string name="capacity">会议室容纳人数</string>
     <string name="please_input_condition">请输入会议室条件</string>
+
+    <string name="not_log_in">未登录，无法获取预约记录</string>
+    <string name="no_record">当前没有会议室预约记录</string>
 </resources>

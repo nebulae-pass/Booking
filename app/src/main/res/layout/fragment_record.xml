@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.graduation.design.bestellen.view.ReinforceRecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recyclerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_error="@layout/layout_error_record"
+    app:layout_empty="@layout/layout_empty_record">
 </com.graduation.design.bestellen.view.ReinforceRecyclerView>

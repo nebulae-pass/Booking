@@ -25,7 +25,7 @@ class ReservationPresenter(view: ReservationContract.View, data: ReservationData
             mView.hideLoading()
         }, onError = {
             mView.hideLoading()
-            mView.showSnackBar(R.string.request_time_out)
+            mView.showTips(R.string.request_time_out)
         })
     }
 
@@ -38,7 +38,7 @@ class ReservationPresenter(view: ReservationContract.View, data: ReservationData
             mView.hideLoading()
         },onError = {
             mView.hideLoading()
-            mView.showSnackBar(R.string.refresh_failed_please_check)
+            mView.showTips(R.string.refresh_failed_please_check)
         })
     }
 
