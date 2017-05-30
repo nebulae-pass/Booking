@@ -25,6 +25,8 @@ class ReinforceRecyclerView @JvmOverloads constructor(context: Context, attrs: A
     private lateinit var mEmptyStub: ViewStub
     private var mLoadingStub: ViewStub? = null
     private lateinit var mErrorStub: ViewStub
+    private var mErrorView: View? = null
+
 
     private var loadMoreListener: OnLoadMoreListener? = null
 
@@ -124,9 +126,12 @@ class ReinforceRecyclerView @JvmOverloads constructor(context: Context, attrs: A
     }
 
     fun setError() {
-        mErrorStub.visibility = View.GONE
+        if (mErrorView == null) {
+            mErrorView = mErrorStub.inflate()
+        }
+        mEmptyStub.visibility = View.GONE
         mLoadingStub?.visibility = View.GONE
-        mErrorStub.visibility = View.VISIBLE
+        mErrorView?.visibility = View.VISIBLE
     }
 
     fun addItemDecoration(decoration: RecyclerView.ItemDecoration) {
@@ -178,19 +183,26 @@ class ReinforceRecyclerView @JvmOverloads constructor(context: Context, attrs: A
     fun showLoadingView() {
         if (mLoadingLayoutId != 0) {
             mLoadingStub?.visibility = View.VISIBLE
-            mErrorStub.visibility = View.GONE
+            mErrorView?.visibility = View.GONE
         }
     }
 
     fun hideLoadingView() {
         if (mLoadingLayoutId != 0) {
             mLoadingStub?.visibility = View.GONE
-            mErrorStub.visibility= View.GONE
+            mErrorView?.visibility = View.GONE
         }
     }
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager) {
         recyclerView.layoutManager = layoutManager
+    }
+
+    fun findErrorViewById(id: Int): View {
+        if (mErrorView == null) {
+            mErrorView = mErrorStub.inflate()
+        }
+        return (mErrorView as View).findViewById(id)
     }
 
     interface OnLoadMoreListener {

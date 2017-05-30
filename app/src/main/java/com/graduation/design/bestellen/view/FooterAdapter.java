@@ -13,10 +13,10 @@ import com.graduation.design.bestellen.base.BaseViewHolder;
  * extends this Adapter can have a footerView
  */
 public abstract class FooterAdapter extends BaseRecyclerAdapter {
-    final int LOAD_MORE = R.layout.view_load_more;
-    boolean isLoadComplete = false;
+    private final int LOAD_MORE = R.layout.view_load_more;
+    private boolean isLoadComplete = false;
 
-    int isVisibility = View.VISIBLE;
+    private int isVisibility = View.VISIBLE;
 
     public FooterAdapter(Context context) {
         super(context);

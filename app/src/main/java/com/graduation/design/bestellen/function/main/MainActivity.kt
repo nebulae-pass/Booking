@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.function.login.LoginDialog
 import com.graduation.design.bestellen.function.main.record.RecordFragment
 import com.graduation.design.bestellen.function.main.reservation.ReservationFragment
@@ -44,7 +43,6 @@ class MainActivity : BaseActivity() {
         container.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                Logs.e(position.toString() + ":" + positionOffset + ":" + positionOffsetPixels)
                 if (position == 0 && y != 0f) {
                     floatingButton.y = y + positionOffsetPixels
                 }
@@ -54,7 +52,7 @@ class MainActivity : BaseActivity() {
 
     override fun initListener() {
         floatingButton.setOnClickListener {
-            LoginDialog().showDialog(supportFragmentManager)
+
         }
     }
 }
