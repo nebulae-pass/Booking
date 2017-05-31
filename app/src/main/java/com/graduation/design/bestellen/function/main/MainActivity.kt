@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
-import com.graduation.design.bestellen.function.login.LoginDialog
 import com.graduation.design.bestellen.function.main.record.RecordFragment
 import com.graduation.design.bestellen.function.main.reservation.ReservationFragment
+import com.graduation.design.bestellen.function.search.ConditionSearchDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -52,7 +52,7 @@ class MainActivity : BaseActivity() {
 
     override fun initListener() {
         floatingButton.setOnClickListener {
-
+            ConditionSearchDialog().showDialog(supportFragmentManager)
         }
     }
 }

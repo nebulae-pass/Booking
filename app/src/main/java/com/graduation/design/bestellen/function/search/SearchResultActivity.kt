@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseToolbarActivity
+import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.function.main.reservation.ReservationAdapter
 import com.graduation.design.bestellen.function.main.reservation.ReservationContract
 import com.graduation.design.bestellen.function.main.reservation.ReservationData
 import com.graduation.design.bestellen.function.main.reservation.ReservationPresenter
+import com.graduation.design.bestellen.model.ConditionSearchData
 import com.graduation.design.bestellen.model.RoomDetail
 import kotlinx.android.synthetic.main.activity_search_result.*
 
@@ -17,9 +19,9 @@ class SearchResultActivity : BaseToolbarActivity(), ReservationContract.View {
     var mPresenter = ReservationPresenter(this, ReservationData())
 
     companion object{
-        fun start(context: Context, data: ArrayList<RoomDetail>) {
+        fun start(context: Context, data: ConditionSearchData) {
             val intent = Intent(context, SearchResultActivity::class.java)
-            intent.putParcelableArrayListExtra("data", data)
+            intent.putExtra("data", data)
             context.startActivity(intent)
         }
     }
@@ -30,8 +32,9 @@ class SearchResultActivity : BaseToolbarActivity(), ReservationContract.View {
     }
 
     override fun initViews() {
-        val data = intent.getParcelableArrayListExtra<RoomDetail>("data")
-        mAdapter = ReservationAdapter(this, data)
+        supportActionBar?.title = "搜索结果"
+        val data = intent.getParcelableExtra<ConditionSearchData>("data")
+        mAdapter = ReservationAdapter(this, ArrayList())
         recyclerView.setAdapter(mAdapter)
     }
 

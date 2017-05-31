@@ -1,5 +1,7 @@
 package com.graduation.design.bestellen.function.room
 
+import com.graduation.design.bestellen.common.Logs
+import com.graduation.design.bestellen.common.Utils
 import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
 import java.text.SimpleDateFormat
@@ -40,24 +42,34 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
             return
         }
         val row = data.row
+        if (Utils.formatDate(list[0].date) == Utils.formatDate(Date())) {
+            val time = System.currentTimeMillis()
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = time
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+            val now = getTimeIndex(hour, minute)
+            list[0].openingTime = OccupyTime(start = now, end = list[0].openingTime.end)
+        }
         for (j in 0..6) {
             val oc = list[j]
             val occupation = oc.occupyList
+            occupation.forEach {
+                for (i in it.start..it.end) {
+                    row[i].statusList[j] = 1
+                }
+            }
             for (i in 0..oc.openingTime.start - 1) {
                 row[i].statusList[j] = -1
             }
             for (i in oc.openingTime.end..27) {
                 row[i].statusList[j] = -1
             }
-            occupation.forEach {
-                for (i in it.start..it.end) {
-                    row[i].statusList[j] = 1
-                }
-            }
             for (i in 0..27) {
                 row[i].period = getTime(i)
             }
         }
+
         data.title.clear()
         data.title.add("时间段")
         for (i in 0..list.size - 1) {
@@ -73,5 +85,12 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
             suffix = ":00"
         }
         return (index / 2 + start).toString() + suffix
+    }
+
+    fun getTimeIndex(hour: Int, minute: Int, start: Int = 8): Int {
+        if (hour + 1 < start) {
+            return 0
+        }
+        return (hour - start + 1) * 2 + minute / 30
     }
 }

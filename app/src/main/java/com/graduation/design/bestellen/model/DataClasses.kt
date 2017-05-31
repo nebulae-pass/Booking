@@ -1,7 +1,6 @@
 package com.graduation.design.bestellen.model
 
 import android.os.Parcel
-import android.util.SparseArray
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 import java.util.*
@@ -34,7 +33,7 @@ data class RoomDetail(val rid: String,
 data class DailyRoomOccupation(val rid: String,
                                val date: Date,
                                val occupyList: ArrayList<OccupyTime>,
-                               val openingTime: OccupyTime) {
+                               var openingTime: OccupyTime) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }
@@ -48,8 +47,8 @@ data class DailyRoomOccupation(val rid: String,
 @PaperParcel
 data class OccupyTime(val id: Int = 0,
                       val start: Int,
-                      val end: Int):PaperParcelable{
-    companion object{
+                      val end: Int) : PaperParcelable {
+    companion object {
         @JvmField val CREATOR = PaperParcelOccupyTime.CREATOR
     }
 
@@ -67,19 +66,35 @@ data class User(val account: String,
 data class RequestResult(val code: Int,
                          val message: String)
 
-data class Record(val uid:String,
+data class Record(val uid: String,
                   val name: String,
                   val date: Date,
                   val period: OccupyTime,
-                  val status: Int,/*1:Under review 2:success 3:failed 4.out of date*/
+                  val status: Int, /*1:Under review 2:success 3:failed 4.out of date*/
                   val message: String)
 
 data class ReservationData(val rid: String,
                            val uid: String,
-                           val applyMessage:String,
-                           val date:String,
+                           val applyMessage: String,
+                           val date: String,
                            val occupyTime: OccupyTime)
 
+@PaperParcel
+@Suppress("unused")
+data class ConditionSearchData(val type: String,
+                               val minCapacity: Int,
+                               val maxCapacity: Int,
+                               val deviceEnable: List<Boolean>) : PaperParcelable {
+    companion object {
+        @JvmField val CREATOR = PaperParcelConditionSearchData.CREATOR
+    }
+
+    override fun describeContents(): Int = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        PaperParcelConditionSearchData.writeToParcel(this, dest, flags)
+    }
+}
 
 class RoomDevice {
     companion object {
