@@ -58,6 +58,7 @@
     <string name="type">会议室类型：</string>
     <string name="condition">设备条件：</string>
     <string name="search">搜索</string>
+    <string name="no_match">没有符合条件的记录</string>
 
     <string-array name="room_type">
         <item>会议室</item>
