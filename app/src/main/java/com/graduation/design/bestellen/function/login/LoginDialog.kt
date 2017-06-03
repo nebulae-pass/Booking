@@ -9,6 +9,8 @@ import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseDialog
 import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.common.CommonTextWatcher
+import com.graduation.design.bestellen.data.LocalDataRepository
+import com.graduation.design.bestellen.model.User
 import kotlinx.android.synthetic.main.dialog_login.*
 
 
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.dialog_login.*
  */
 class LoginDialog : BaseDialog(), LoginContract.View {
     val mPresenter: LoginPresenter = LoginPresenter(this, LoginData())
-    var mSuccessListener: (account: String) -> Unit = {}
+    var mSuccessListener: (user: User) -> Unit = {}
 
     //from view
     override fun setPresenter(presenter: LoginContract.Presenter) {
@@ -30,10 +32,15 @@ class LoginDialog : BaseDialog(), LoginContract.View {
         loginButton.progress = -1
     }
 
-    override fun onSuccess() {
-        Account.account = accountEditText.text.toString()
+    override fun onSuccess(user: User) {
+        Account.account = user.account
+        Account.name = user.name
+        val data = LocalDataRepository(activity)
+        data.account = user.account
+        data.name = user.name
+        data.password = passwordEditText.text.toString()
         dismiss()
-        mSuccessListener(accountEditText.text.toString())
+        mSuccessListener(user)
     }
 
     override fun startProgressing() {
@@ -54,7 +61,7 @@ class LoginDialog : BaseDialog(), LoginContract.View {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    fun setOnLoginSuccessListener(onSuccess: (account: String) -> Unit) {
+    fun setOnLoginSuccessListener(onSuccess: (user: User) -> Unit) {
         mSuccessListener = onSuccess
     }
 

@@ -89,10 +89,12 @@ class ReinforceRecyclerView @JvmOverloads constructor(context: Context, attrs: A
                     return
                 if (recyclerView.adapter.itemCount == 0) {
                     mEmptyStub.visibility = View.VISIBLE
+                    mErrorView?.visibility = View.GONE
                     recyclerView.visibility = View.GONE
 
                 } else {
                     mEmptyStub.visibility = View.GONE
+                    mErrorView?.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE
                 }
             }

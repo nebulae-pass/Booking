@@ -60,8 +60,8 @@ data class OccupyTime(val id: Int = 0,
 }
 
 
-data class User(val account: String,
-                val password: String)
+data class LoginData(val account: String,
+                     val password: String)
 
 data class RequestResult(val code: Int,
                          val message: String)
@@ -78,6 +78,10 @@ data class ReservationData(val rid: String,
                            val applyMessage: String,
                            val date: String,
                            val occupyTime: OccupyTime)
+
+data class User(val account: String,
+                val name: String)
+
 
 @PaperParcel
 @Suppress("unused")

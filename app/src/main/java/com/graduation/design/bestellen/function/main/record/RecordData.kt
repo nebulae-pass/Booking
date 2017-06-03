@@ -28,7 +28,7 @@ class RecordData : RemoteDataRepository() {
     }
 
     interface RecordService {
-        @GET("/record/{uid}")
+        @GET("/records/{uid}")
         fun getRecord(@Path("uid") uid: String): Observable<Response<ArrayList<Record>>>
     }
 }

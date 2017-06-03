@@ -2,6 +2,7 @@ package com.graduation.design.bestellen.function.login
 
 import com.graduation.design.bestellen.base.BasePresenter
 import com.graduation.design.bestellen.base.BaseView
+import com.graduation.design.bestellen.model.User
 
 /**
  * Created by pan on 2017/5/19.
@@ -10,7 +11,7 @@ import com.graduation.design.bestellen.base.BaseView
 interface LoginContract {
     interface View : BaseView<Presenter> {
         fun onFailed(message:String)
-        fun onSuccess()
+        fun onSuccess(user: User)
         fun startProgressing()
         fun setLoginEnable()
         fun setLoginDisable()

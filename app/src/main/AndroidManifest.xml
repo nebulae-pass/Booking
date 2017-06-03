@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".function.search.SearchResultActivity">
         </activity>
+        <activity android:name=".function.setting.SettingActivity">
+        </activity>
     </application>
 
 </manifest>

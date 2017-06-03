@@ -5,8 +5,12 @@ package com.graduation.design.bestellen.common
  * Account for user
  */
 object Account {
-
     var account: String = ""
+        get() = field
+        set(value) {
+            field = value
+        }
+    var name: String = ""
         get() = field
         set(value) {
             field = value

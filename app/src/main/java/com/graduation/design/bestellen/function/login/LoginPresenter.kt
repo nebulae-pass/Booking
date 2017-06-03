@@ -15,8 +15,8 @@ class LoginPresenter(view: LoginContract.View, data: LoginData) : LoginContract.
 
     override fun login(account: String, password: String) {
         mView.startProgressing()
-        mData.loginForResult(account, password, onSuccess = {
-            mView.onSuccess()
+        mData.loginForResult(account, password, onSuccess = {user->
+            mView.onSuccess(user)
         }, onFailed = { it ->
             mView.onFailed(it)
         })
