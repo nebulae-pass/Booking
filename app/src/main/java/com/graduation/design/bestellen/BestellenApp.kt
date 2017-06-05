@@ -12,7 +12,8 @@ import com.graduation.design.bestellen.function.login.LoginData
 class BestellenApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        val data = LocalDataRepository(this)
+        LocalDataRepository.init(this)
+        val data = LocalDataRepository.getInstance()
         if (!data.account.isEmpty()) {
             LoginData().loginForResult(data.account, data.password,onSuccess = { user ->
                 Account.account = user.account

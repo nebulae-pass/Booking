@@ -29,6 +29,7 @@ class RoomOccupationData : RemoteDataRepository() {
                     val result = response.body()
                     onSuccess(result)
                 }, { e ->
+                    e.printStackTrace()
                     onFailed(e.toString())
                     Logs.e(e.toString())
                 })

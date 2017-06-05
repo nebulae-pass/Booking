@@ -125,7 +125,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         popupWindow.contentView = view
         popupWindow.isOutsideTouchable = true
-        popupWindow.showAtLocation(tabLayout, Gravity.END or Gravity.TOP, -10, getStatusBarHeight() + supportActionBar!!.height)
+        popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.END or Gravity.TOP, -10, getStatusBarHeight() + supportActionBar!!.height)
     }
 
     private fun getNameDrawable(): Drawable {

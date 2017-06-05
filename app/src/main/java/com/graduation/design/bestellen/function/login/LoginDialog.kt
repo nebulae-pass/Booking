@@ -35,7 +35,7 @@ class LoginDialog : BaseDialog(), LoginContract.View {
     override fun onSuccess(user: User) {
         Account.account = user.account
         Account.name = user.name
-        val data = LocalDataRepository(activity)
+        val data = LocalDataRepository.getInstance()
         data.account = user.account
         data.name = user.name
         data.password = passwordEditText.text.toString()

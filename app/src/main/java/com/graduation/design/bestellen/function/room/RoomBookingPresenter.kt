@@ -1,12 +1,10 @@
 package com.graduation.design.bestellen.function.room
 
-import com.graduation.design.bestellen.common.Logs
 import com.graduation.design.bestellen.common.Utils
 import com.graduation.design.bestellen.model.DailyRoomOccupation
 import com.graduation.design.bestellen.model.OccupyTime
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by pan on 2017/5/11.
@@ -48,7 +46,11 @@ class RoomBookingPresenter(view: RoomBookingContract.View, data: RoomOccupationD
             calendar.timeInMillis = time
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
-            val now = getTimeIndex(hour, minute)
+            var now = getTimeIndex(hour, minute)
+            val end = list[0].openingTime.end
+            if (now > end) {
+                now = end
+            }
             list[0].openingTime = OccupyTime(start = now, end = list[0].openingTime.end)
         }
         for (j in 0..6) {
