@@ -3,6 +3,7 @@ package com.graduation.design.bestellen.function.main
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
 import com.graduation.design.bestellen.function.main.record.RecordFragment
@@ -23,6 +24,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initViews() {
+
+
         setSupportActionBar(toolbar)
         supportActionBar?.title = "主页"
 
@@ -48,6 +51,12 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
+//        val visible = View.GONE
+//        tabLayout.visibility = visible
+//        container.visibility = visible
+//        floatingButton.post{
+//            floatingButton.hide()
+//        }
     }
 
     override fun initListener() {

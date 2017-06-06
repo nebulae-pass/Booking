@@ -100,7 +100,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun showUserMenu() {
         val popupWindow = PopupWindow(this)
-        val view = LayoutInflater.from(this).inflate(R.layout.menu_layout_user, topLayout, false)
+        val view = LayoutInflater.from(this).inflate(R.layout.menu_layout_user, findViewById(android.R.id.content) as ViewGroup, false)
         val account = view.findViewById(R.id.user_id) as TextView
         val name = view.findViewById(R.id.user_name) as TextView
         val setting = view.findViewById(R.id.setting)
@@ -125,7 +125,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         popupWindow.contentView = view
         popupWindow.isOutsideTouchable = true
-        popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.END or Gravity.TOP, -10, getStatusBarHeight() + supportActionBar!!.height)
+        popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.END or Gravity.TOP, -10, supportActionBar!!.height)
     }
 
     private fun getNameDrawable(): Drawable {

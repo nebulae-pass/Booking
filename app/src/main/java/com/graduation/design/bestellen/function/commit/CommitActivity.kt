@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseToolbarActivity
+import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.common.LoadingDialog
 import com.graduation.design.bestellen.common.Utils
 import com.graduation.design.bestellen.model.OccupyTime
@@ -60,7 +61,10 @@ class CommitActivity : BaseToolbarActivity(), CommitContract.View {
         val date = intent.getStringExtra("date")
         val occupy = intent.getParcelableExtra<OccupyTime>("occupy")
 
+        supportActionBar?.title = "提交记录"
+
         roomNameText.text = detail.name
+        applyPeople.text = getString(R.string.apply_people, Account.name)
         dateText.text = getString(R.string.apply_date, date)
         periodText.text = getString(R.string.apply_time, Utils.getTime(occupy.start), Utils.getTime(occupy.end + 1))
 

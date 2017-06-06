@@ -19,8 +19,6 @@ class BestellenApp : Application() {
                 Account.account = user.account
                 Account.name = user.name
             },onFailed = {})
-
-
         }
     }
 }

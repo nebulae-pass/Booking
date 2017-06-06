@@ -7,6 +7,7 @@ import kotlin.reflect.KProperty
 
 /**
  * Created by pan on 2017/6/2.
+ * String preference
  */
 class StringPreference(val context: Context, val name: String, val default: String) : ReadWriteProperty<Any, String> {
     val prefs: SharedPreferences by lazy {

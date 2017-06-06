@@ -2,12 +2,12 @@ package com.graduation.design.bestellen.function.setting
 
 import android.os.Bundle
 import com.graduation.design.bestellen.R
-import com.graduation.design.bestellen.base.BaseActivity
+import com.graduation.design.bestellen.base.BaseToolbarActivity
 import com.graduation.design.bestellen.common.Account
 import com.graduation.design.bestellen.data.LocalDataRepository
 import kotlinx.android.synthetic.main.activity_setting.*
 
-class SettingActivity : BaseActivity() {
+class SettingActivity : BaseToolbarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +15,7 @@ class SettingActivity : BaseActivity() {
     }
 
     override fun initViews() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "账户设置"
     }
 

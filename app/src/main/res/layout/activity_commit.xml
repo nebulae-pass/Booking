@@ -28,6 +28,16 @@
         tools:text="逸夫303室"/>
 
     <TextView
+        android:id="@+id/applyPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        tools:text="逸夫303室"/>
+
+    <TextView
         android:id="@+id/dateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,12 +76,12 @@
         android:hint="@string/please_input_content"/>
 
     <TextView
-        android:layout_gravity="center"
         android:id="@+id/errorText"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/holo_red_dark"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_red_dark"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/commitButton"
