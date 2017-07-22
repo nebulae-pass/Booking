@@ -62,6 +62,9 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
                         } else {
                             mEnd = rowNumber - 1
                         }
+                        if (periodAlreadyOccupied(mStart, mEnd, colNumber)) {
+                            mStart = mEnd
+                        }
                         for (i in mStart..mEnd) {
                             mDataList[i].statusList[colNumber - 1] = 2
                         }
@@ -93,6 +96,10 @@ class FormAdapter(context: Context, data: FormData) : FormView.BaseAdapter<FormC
                 notifyDataSetChanged()
             }
         }
+    }
+
+    private fun periodAlreadyOccupied(start: Int, end: Int, colNumber: Int): Boolean {
+        return (start..end).any { mDataList[it].statusList[colNumber - 1] == 1 }
     }
 
     fun isSelectedCompleted() = mSelectedColumn != -1

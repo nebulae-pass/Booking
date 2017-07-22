@@ -1,7 +1,12 @@
 package com.graduation.design.bestellen
 
+import android.Manifest
 import android.app.Application
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import com.graduation.design.bestellen.common.Account
+import com.graduation.design.bestellen.common.CrashHandler
 import com.graduation.design.bestellen.data.LocalDataRepository
 import com.graduation.design.bestellen.function.login.LoginData
 
@@ -12,6 +17,12 @@ import com.graduation.design.bestellen.function.login.LoginData
 class BestellenApp : Application() {
     override fun onCreate() {
         super.onCreate()
+
+
+
+        val crashHandler = CrashHandler.getInstance()
+        crashHandler.init(this)
+
         LocalDataRepository.init(this)
         val data = LocalDataRepository.getInstance()
         if (!data.account.isEmpty()) {

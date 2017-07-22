@@ -1,15 +1,19 @@
 package com.graduation.design.bestellen.function.main
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import android.view.View
 import com.graduation.design.bestellen.R
 import com.graduation.design.bestellen.base.BaseActivity
 import com.graduation.design.bestellen.function.main.record.RecordFragment
 import com.graduation.design.bestellen.function.main.reservation.ReservationFragment
 import com.graduation.design.bestellen.function.search.ConditionSearchDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 /**
  * Created by pan on 2017/5/4.
@@ -24,7 +28,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initViews() {
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    0)
+        }
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = "主页"
